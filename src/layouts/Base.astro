@@ -99,7 +99,9 @@ const grafo = {
     <slot />
   </main>
   <Rodape temArtigos={temArtigos} aviso={avisoRodape} />
-  <BotaoWhatsApp rotulo={rotuloFlutuante} mensagem={mensagemWhatsApp} local="flutuante" classe="wa-float" />
+  <aside aria-label="Contato rápido pelo WhatsApp">
+    <BotaoWhatsApp rotulo={rotuloFlutuante} mensagem={mensagemWhatsApp} local="flutuante" classe="wa-float" />
+  </aside>
   <script src="../scripts/site.js"></script>
 </body>
 </html>
