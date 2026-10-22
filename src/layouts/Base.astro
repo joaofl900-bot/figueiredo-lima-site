@@ -40,8 +40,8 @@ const grafo = {
       legalName: escritorio.razaoSocial,
       taxID: escritorio.cnpj,
       url: `${escritorio.site}/`,
-      logo: `${escritorio.site}/logo-figueiredo-lima.png`,
-      image: `${escritorio.site}/joao-retrato.jpg`,
+      logo: { '@type': 'ImageObject', url: `${escritorio.site}/logo-quadrado.png`, width: 600, height: 600 },
+      image: [`${escritorio.site}/logo-quadrado.png`, `${escritorio.site}/joao-retrato.jpg`],
       telephone: escritorio.telefoneE164,
       email: escritorio.email,
       address: { '@type': 'PostalAddress', addressLocality: escritorio.cidade, addressRegion: escritorio.uf, addressCountry: 'BR' },
@@ -61,6 +61,15 @@ const grafo = {
       knowsAbout: ['Direito tributário', 'Planos de saúde', 'Direito do consumidor', 'Leilões de imóveis', 'Direito público', 'Direito civil'],
       sameAs: [escritorio.instagram],
     },
+    {
+      '@type': 'WebSite',
+      '@id': `${escritorio.site}/#site`,
+      url: `${escritorio.site}/`,
+      name: escritorio.marca,
+      alternateName: ['Figueiredo Lima', 'figueiredolima.adv.br'],
+      inLanguage: 'pt-BR',
+      publisher: { '@id': ID_ESCRITORIO },
+    },
     ...jsonld,
   ],
 };
@@ -74,7 +83,10 @@ const grafo = {
   <meta name="description" content={descricao}>
   {noindex ? <meta name="robots" content="noindex, follow"> : <link rel="canonical" href={canonical}>}
   <meta name="theme-color" content="#F3EEE6">
-  <link rel="icon" type="image/png" href="/logo-figueiredo-lima-503.png">
+  <!-- Ícone quadrado com o "F" e o "L" recortados do logotipo (scripts/gerar-icones.mjs) -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icone-192.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/public-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <meta property="og:type" content={tipoOg}>

@@ -1,11 +1,14 @@
-// Publicação na Cloudflare: um Worker só com arquivos estáticos (a pasta dist/, gerada pelo Astro).
-// É o mesmo Worker "figueiredo-lima" do site atual, com os mesmos domínios.
+// Publicação na Cloudflare: o Worker "figueiredo-lima" entrega a pasta dist/ (gerada pelo Astro).
+// O pequeno script em worker/index.js roda antes de cada acesso só para levar www e http ao endereço oficial.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "figueiredo-lima",
+  "main": "worker/index.js",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
@@ -13,7 +16,6 @@
     { "pattern": "figueiredolima.adv.br", "custom_domain": true },
     { "pattern": "www.figueiredolima.adv.br", "custom_domain": true }
   ],
-  // Endereços de prévia (*.workers.dev) para conferir mudanças antes de irem ao ar.
   "workers_dev": false,
   "preview_urls": false
 }
