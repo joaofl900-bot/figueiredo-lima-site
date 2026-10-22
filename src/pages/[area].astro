@@ -54,7 +54,7 @@ const jsonld = [
 ];
 ---
 <Base titulo={d.seoTitulo} descricao={d.seoDescricao} jsonld={jsonld} mensagemWhatsApp={d.mensagemWhatsApp} rotuloFlutuante={d.botao} avisoRodape={d.avisoRodape}>
-  {d.avisoSimples && <AvisoSimples slot="antes-do-cabecalho" />}
+  {d.avisoSimples && <AvisoSimples />}
 
   <section class="wrap" style="padding-top: 32px;" aria-labelledby="titulo">
     <nav class="trilha" aria-label="Trilha de navegação">
@@ -133,7 +133,7 @@ const jsonld = [
 
   <Etapas itens={d.etapas} titulo="Como funciona o atendimento" id="etapas" />
 
-  <Advogado titulo="Advogado responsável" mestrado={d.mestrado} foto="principal" id="advogado" />
+  <Advogado titulo="Advogado responsável" foto="principal" id="advogado" />
 
   <Faq itens={d.faq} titulo={d.faqTitulo} />
 

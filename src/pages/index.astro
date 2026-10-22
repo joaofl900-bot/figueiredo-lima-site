@@ -97,7 +97,8 @@ const faqJsonLd = { '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': '
       <div data-reveal>
         <span class="label">Brasília · DF</span>
         <h2 class="h2" id="t-capital">Na capital do país, perto de onde as decisões acontecem.</h2>
-        <p>Escritório no Lago Norte, com atendimento presencial com horário marcado. Para quem está em outro estado, todo o atendimento é feito a distância, com a mesma proximidade.</p>
+        <p>Escritório no <a class="link-noite" href={escritorio.mapa} target="_blank" rel="noopener">Lago Norte, em Brasília</a>, com atendimento presencial com horário marcado. Para quem está em outro estado, todo o atendimento é feito à distância, com a mesma proximidade.</p>
+        <p class="small"><a class="link-noite" href={escritorio.mapa} target="_blank" rel="noopener">Ver o escritório no Google Maps</a></p>
       </div>
       <figure data-reveal>
         <Picture src={congresso} formats={['avif', 'webp']} widths={[640, 960, 1280]} sizes="(max-width: 960px) 92vw, 640px" alt="Congresso Nacional, em Brasília, refletido no espelho d'água" loading="lazy" />

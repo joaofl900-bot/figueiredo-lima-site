@@ -1,13 +1,12 @@
 ---
-// Bloco "advogado responsável", usado na home e nas áreas. A formação fica como no site atual;
-// a linha do mestrado (aluno especial) aparece só onde "mestrado" for verdadeiro.
+// Bloco "advogado responsável", usado na home e nas áreas. A formação fica como no site atual.
 import { Picture } from 'astro:assets';
 import couro from '../assets/fotos/joao-couro.jpg';
 import principal from '../assets/fotos/joao-principal.jpg';
 import { escritorio } from '../data/escritorio';
 
-interface Props { titulo?: string; mestrado?: boolean; foto?: 'couro' | 'principal'; id?: string }
-const { titulo = 'Sobre', mestrado = false, foto = 'couro', id = 'sobre' } = Astro.props;
+interface Props { titulo?: string; foto?: 'couro' | 'principal'; id?: string }
+const { titulo = 'Sobre', foto = 'couro', id = 'sobre' } = Astro.props;
 const img = foto === 'couro' ? couro : principal;
 const posicao = foto === 'couro' ? '50% 62%' : '50% 28%';
 ---
@@ -21,7 +20,6 @@ const posicao = foto === 'couro' ? '50% 62%' : '50% 28%';
       <h2 class="h2" id={`t-${id}`}>{escritorio.advogado}</h2>
       <div class="rule"></div>
       <p class="quote">Advogado com atuação em direito tributário, cível e público, formado pelo IDP, com estudos de pós-graduação em Direito Tributário, Direito Constitucional e Direitos Humanos pelo IDP e pela UnB.</p>
-      {mestrado && <p class="muted">Aluno especial do mestrado em Direito da UnB, em Direito Tributário, com uma disciplina já concluída.</p>}
       <p class="muted">Experiência em consultoria de empresas e escritórios de advocacia. Cada cliente é atendido pessoalmente, com explicações claras sobre cada etapa.</p>
       <ul class="fatos">
         <li><span class="label">Inscrição</span><span><b>{escritorio.oab}</b> · <a class="link" href={escritorio.cna} target="_blank" rel="noopener">confirmar no CNA</a></span></li>

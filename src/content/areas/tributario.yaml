@@ -62,7 +62,6 @@ etapas:
   - { titulo: Análise jurídica, texto: "Exame dos débitos, com riscos e alternativas explicados por escrito." }
   - { titulo: Encaminhamentos, texto: "Medidas cabíveis e proposta por escrito, com o escopo do trabalho." }
   - { titulo: Acompanhamento, texto: "Com a assessoria mensal, acompanhamento periódico no escopo do contrato." }
-mestrado: true
 faqTitulo: Dúvidas sobre débitos tributários
 faq:
   - pergunta: O que significa ter um débito inscrito em dívida ativa?

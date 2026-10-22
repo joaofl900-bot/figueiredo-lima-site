@@ -1,17 +1,29 @@
 ---
-// Faixa do Simples Nacional no topo da página do tributário (como na landing dos anúncios).
+// Aviso do Simples Nacional, centralizado na primeira tela da página do tributário
+// (desenho aprovado no canvas de telas, 22/10/2026).
 // O aviso com prazo some sozinho depois de "ate"; a versão permanente aparece no lugar.
-// Para um novo prazo da Receita, troque o texto e a data abaixo.
+// Para um novo prazo da Receita, troque os textos, o link do comunicado e a data abaixo.
 import { linkWhatsApp } from '../data/escritorio';
+
 const ate = '2026-10-31T00:00:00-03:00';
+const comunicado = 'https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/a-receita-federal-divulga-a-atualizacao-dos-numeros-referentes-as-solicitacoes-de-opcao-pelo-simples-nacional-e-pelo-regime-regular-do-ibs-e-da-cbs';
 ---
-<div class="aviso" role="region" aria-label="Aviso sobre o Simples Nacional">
-  <div class="wrap aviso-in" data-ate={ate}>
-    <p><strong>Simples Nacional 2027: pedido de opção indeferido por pendências?</strong> Empresas que pediram a opção no prazo podem regularizar até 30/10/2026, segundo a Receita Federal.</p>
-    <a class="btn btn-night" href={linkWhatsApp('Olá! Vim pelo site e quero falar sobre o indeferimento no Simples Nacional.')} target="_blank" rel="noopener" data-evento="clique_whatsapp" data-local="aviso-simples"><svg aria-hidden="true"><use href="#i-wa"></use></svg>Falar sobre o indeferimento</a>
+<section class="aviso-tela" aria-label="Aviso sobre o Simples Nacional">
+  <div class="aviso-card" data-ate={ate}>
+    <span class="aviso-selo">Prazo até 30/10/2026</span>
+    <h2 class="aviso-titulo">Simples Nacional 2027: pedido de opção indeferido por pendências?</h2>
+    <p>Empresas que pediram a opção no prazo podem regularizar as pendências até 30/10/2026, segundo a Receita Federal.</p>
+    <div class="aviso-acoes">
+      <a class="btn btn-ouro" href={linkWhatsApp('Olá! Vim pelo site e quero falar sobre o indeferimento no Simples Nacional.')} target="_blank" rel="noopener" data-evento="clique_whatsapp" data-local="aviso-simples" data-wa-ancora><svg aria-hidden="true"><use href="#i-wa"></use></svg>Falar sobre o indeferimento</a>
+      <a class="link-noite" href={comunicado} target="_blank" rel="noopener">Ver o comunicado da Receita</a>
+    </div>
   </div>
-  <div class="wrap aviso-in" data-depois hidden>
-    <p><strong>Simples Nacional: débitos podem levar à exclusão do regime.</strong> Entenda como regularizar a tempo.</p>
-    <a class="btn btn-night" href={linkWhatsApp('Olá! Vim pelo site e quero falar sobre o Simples Nacional da minha empresa.')} target="_blank" rel="noopener" data-evento="clique_whatsapp" data-local="aviso-simples"><svg aria-hidden="true"><use href="#i-wa"></use></svg>Falar sobre o Simples Nacional</a>
+  <div class="aviso-card" data-depois hidden>
+    <span class="aviso-selo">Simples Nacional</span>
+    <h2 class="aviso-titulo">Débitos podem levar à exclusão do Simples Nacional</h2>
+    <p>A empresa optante pode permanecer no regime se regularizar os débitos dentro do prazo. Entenda as alternativas da sua empresa.</p>
+    <div class="aviso-acoes">
+      <a class="btn btn-ouro" href={linkWhatsApp('Olá! Vim pelo site e quero falar sobre o Simples Nacional da minha empresa.')} target="_blank" rel="noopener" data-evento="clique_whatsapp" data-local="aviso-simples" data-wa-ancora><svg aria-hidden="true"><use href="#i-wa"></use></svg>Falar sobre o Simples Nacional</a>
+    </div>
   </div>
-</div>
+</section>

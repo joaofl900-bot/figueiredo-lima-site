@@ -20,6 +20,8 @@ export const escritorio = {
   instagram: 'https://www.instagram.com/joaofigueiredolima/',
   site: 'https://figueiredolima.adv.br',
   cna: 'https://cna.oab.org.br/',
+  // Perfil do escritório no Google Maps.
+  mapa: 'https://maps.app.goo.gl/g1ZJNjijwAHV24Ft9',
 } as const;
 
 // Monta o link do WhatsApp com a mensagem inicial de cada página.

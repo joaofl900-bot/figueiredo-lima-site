@@ -15,7 +15,7 @@ const { temArtigos, aviso } = Astro.props;
       <Image class="ftr-logo" src={logo} alt="Figueiredo Lima Advocacia" width={340} />
       <address>
         Advogado responsável: {escritorio.advogado}, {escritorio.oab}<br>
-        {escritorio.bairro}, {escritorio.cidade}/{escritorio.uf} · atendimento presencial com horário marcado<br>
+        <a href={escritorio.mapa} target="_blank" rel="noopener">{escritorio.bairro}, {escritorio.cidade}/{escritorio.uf}</a> · atendimento presencial com horário marcado<br>
         WhatsApp e telefone: <a href={`tel:${escritorio.telefoneE164}`}>{escritorio.telefone}</a><br>
         E-mail: <a href={`mailto:${escritorio.email}`}>{escritorio.email}</a>
       </address>

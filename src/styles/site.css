@@ -295,3 +295,27 @@ a.area:hover { border-color: var(--gold); transform: translateY(-2px); }
 .duas-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); align-items: start; }
 @media (max-width: 960px) { .duas-col { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); } }
 .crop picture { display: contents; }
+
+/* Link dentro das faixas escuras */
+.link-noite { color: var(--on-night); text-decoration: underline; text-decoration-color: var(--gold-on-night); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.link-noite:hover { text-decoration-thickness: 2px; }
+
+/* Aviso do Simples Nacional: cartão escuro centralizado na primeira tela do tributário */
+.aviso-tela { display: flex; justify-content: center; padding: 40px max(var(--space-6), env(safe-area-inset-right, 0px)) 0 max(var(--space-6), env(safe-area-inset-left, 0px)); }
+.aviso-card { width: 100%; max-width: 860px; background: var(--night); border: 1px solid var(--gold-on-night); padding: 36px 48px; display: flex; flex-direction: column; align-items: center; gap: var(--space-4); text-align: center; }
+.aviso-card p { margin: 0; max-width: 600px; font-size: 17px; line-height: 1.6; color: var(--on-night-muted); }
+.aviso-selo { display: inline-flex; border: 1px solid var(--gold-on-night); color: var(--gold-on-night); padding: 4px 12px; border-radius: var(--radius-pill); font: 600 12px/1.4 var(--font-sans); letter-spacing: .14em; text-transform: uppercase; }
+.aviso-titulo { margin: 0; max-width: 640px; font: 500 32px/1.2 var(--font-serif); font-variation-settings: "opsz" 36; color: var(--on-night); text-wrap: balance; }
+.aviso-acoes { display: flex; gap: 20px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: var(--space-1); }
+.btn-ouro { background: var(--gold-on-night); color: var(--night); min-height: 52px; padding: 14px 26px; }
+.btn-ouro:hover { background: #D8B862; }
+.aviso-card .link-noite { font-weight: 600; font-size: 15px; }
+.aviso-card :where(a):focus-visible { outline-color: var(--focus-on-night); }
+@media (max-width: 600px) {
+  .aviso-tela { padding: 20px max(var(--space-4), env(safe-area-inset-right, 0px)) 0 max(var(--space-4), env(safe-area-inset-left, 0px)); }
+  .aviso-card { padding: 28px 20px; gap: 14px; }
+  .aviso-titulo { font-size: 25px; }
+  .aviso-card p { font-size: 16px; }
+  .aviso-acoes { flex-direction: column; width: 100%; gap: 14px; }
+  .aviso-acoes .btn-ouro { width: 100%; }
+}

@@ -46,6 +46,7 @@ const grafo = {
       email: escritorio.email,
       address: { '@type': 'PostalAddress', addressLocality: escritorio.cidade, addressRegion: escritorio.uf, addressCountry: 'BR' },
       areaServed: { '@type': 'Country', name: 'Brasil' },
+      hasMap: escritorio.mapa,
       founder: { '@id': ID_ADVOGADO },
       sameAs: [escritorio.instagram],
     },

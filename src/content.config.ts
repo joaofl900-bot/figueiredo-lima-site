@@ -42,7 +42,6 @@ const areas = defineCollection({
     }).optional(),
     documentos: z.array(z.string()),
     etapas: z.array(item).optional(),
-    mestrado: z.boolean().default(false),
     faqTitulo: z.string().default('Perguntas frequentes'),
     faq: z.array(z.object({ pergunta: z.string(), resposta: z.string() })),
     chamadaTitulo: z.string(),
