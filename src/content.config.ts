@@ -54,7 +54,13 @@ const areas = defineCollection({
 const AREAS = ['tributario', 'planos-de-saude', 'consumidor', 'leiloes-de-imoveis', 'direito-publico', 'civel'] as const;
 
 const artigos = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/artigos' }),
+  // O endereço do artigo vem do nome do arquivo, sem acentos e com hífens
+  // ("Débitos no Simples.md" vira /artigos/debitos-no-simples/), mesmo que o editor grave acentos.
+  loader: glob({
+    pattern: '**/*.md',
+    base: './src/content/artigos',
+    generateId: ({ entry }) => entry.replace(/\.md$/, '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
+  }),
   schema: z.object({
     title: z.string(),
     description: z.string().max(170),
