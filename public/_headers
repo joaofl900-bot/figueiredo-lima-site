@@ -1,0 +1,16 @@
+# Cabeçalhos enviados pela Cloudflare.
+# Arquivos com nome único (gerados pelo Astro) e fontes podem ficar guardados no navegador por 1 ano.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/img/*
+  Cache-Control: public, max-age=2592000
+
+# Segurança para todas as páginas.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000

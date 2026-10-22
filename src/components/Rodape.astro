@@ -1,0 +1,41 @@
+---
+// Rodapé com os dados de identificação exigidos na publicidade da advocacia (Provimento 205/2021).
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import logo from '../assets/logo.png';
+import { escritorio } from '../data/escritorio';
+
+const areas = (await getCollection('areas')).sort((a, b) => a.data.ordem - b.data.ordem);
+interface Props { temArtigos: boolean; aviso?: string }
+const { temArtigos, aviso } = Astro.props;
+---
+<footer class="ftr" id="rodape">
+  <div class="ftr-in">
+    <div>
+      <Image class="ftr-logo" src={logo} alt="Figueiredo Lima Advocacia" width={340} />
+      <address>
+        Advogado responsável: {escritorio.advogado}, {escritorio.oab}<br>
+        {escritorio.bairro}, {escritorio.cidade}/{escritorio.uf} · atendimento presencial com horário marcado<br>
+        WhatsApp e telefone: <a href={`tel:${escritorio.telefoneE164}`}>{escritorio.telefone}</a><br>
+        E-mail: <a href={`mailto:${escritorio.email}`}>{escritorio.email}</a>
+      </address>
+    </div>
+    <nav aria-label="Áreas de atuação">
+      <h2>Áreas</h2>
+      <ul>{areas.map((a) => <li><a href={`/${a.id}/`}>{a.data.nome}</a></li>)}</ul>
+    </nav>
+    <nav aria-label="Escritório">
+      <h2>Escritório</h2>
+      <ul>
+        <li><a href="/sobre/">Sobre</a></li>
+        {temArtigos && <li><a href="/artigos/">Artigos</a></li>}
+        <li><a href="/contato/">Contato</a></li>
+        <li><a href="/privacidade/">Privacidade</a></li>
+        <li><a href={escritorio.instagram} target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </nav>
+    <p class="ftr-legal">
+      {escritorio.marca} é a marca de {escritorio.razaoSocial}, CNPJ {escritorio.cnpj}. Conteúdo informativo, nos termos do Provimento 205/2021 do CFOAB.{aviso && ` ${aviso}`}
+    </p>
+  </div>
+</footer>

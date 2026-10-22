@@ -1,0 +1,132 @@
+---
+// Página inicial (direção A, aprovada em 22/10/2026).
+import { Picture } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import BotaoWhatsApp from '../components/BotaoWhatsApp.astro';
+import Etapas from '../components/Etapas.astro';
+import Advogado from '../components/Advogado.astro';
+import Faq from '../components/Faq.astro';
+import Chamada from '../components/Chamada.astro';
+import principal from '../assets/fotos/joao-principal.jpg';
+import congresso from '../assets/fotos/congresso.jpg';
+import { escritorio } from '../data/escritorio';
+
+const areas = (await getCollection('areas')).sort((a, b) => a.data.ordem - b.data.ordem);
+const destaque = areas.find((a) => a.data.principal)!;
+const outras = areas.filter((a) => !a.data.principal);
+const artigos = (await getCollection('artigos', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const faq = [
+  { pergunta: 'Preciso ir ao escritório?', resposta: 'Não. A conversa pode ser por vídeo ou WhatsApp, os documentos são enviados por foto ou PDF e o contrato é assinado eletronicamente.' },
+  { pergunta: 'Vocês atendem fora do Distrito Federal?', resposta: 'Sim. Os processos são eletrônicos, o que permite atuar em todo o país.' },
+  { pergunta: 'Como confirmo que o advogado está regular?', resposta: `No Cadastro Nacional dos Advogados (cna.oab.org.br), pelo nome ${escritorio.advogado} ou pelo número ${escritorio.oab}.` },
+  { pergunta: 'Meus dados ficam protegidos?', resposta: 'Sim. Tudo o que você compartilha é protegido pelo sigilo profissional e tratado conforme a Lei Geral de Proteção de Dados.' },
+  { pergunta: 'Como são definidos os honorários?', resposta: 'Sempre em contrato escrito, explicado antes de qualquer assinatura, conforme o Código de Ética e a tabela de honorários da OAB/DF.' },
+];
+const faqJsonLd = { '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.pergunta, acceptedAnswer: { '@type': 'Answer', text: f.resposta } })) };
+---
+<Base
+  titulo="Advogado tributarista em Brasília | Figueiredo Lima Advocacia"
+  descricao="João Vitor Figueiredo Lima, OAB/DF 77.088. Regularização fiscal e assessoria jurídica para empresas, planos de saúde, consumidor, leilões de imóveis, cível e direito público. Brasília e on-line em todo o Brasil."
+  jsonld={[faqJsonLd]}
+>
+  <section class="wrap hero" aria-labelledby="titulo">
+    <div class="hero-text">
+      <span class="label">Brasília · atendimento on-line em todo o Brasil</span>
+      <h1 class="display" id="titulo">Regularização fiscal e assessoria jurídica para empresas</h1>
+      <p class="lead">Débitos tributários, parcelamentos e transação com a PGFN, com acompanhamento mensal e atendimento direto com o advogado. Também atuo em planos de saúde, direito do consumidor, leilões de imóveis, cível e direito público.</p>
+      <div class="hero-actions">
+        <BotaoWhatsApp rotulo="Falar com o advogado no WhatsApp" local="abertura" grande ancora />
+        <a class="link" href="#areas">Ver áreas de atuação</a>
+      </div>
+      <p class="micro">Mensagem respondida pelo próprio advogado.</p>
+    </div>
+    <figure class="frame">
+      <div class="crop crop-principal">
+        <Picture src={principal} formats={['avif', 'webp']} widths={[480, 640, 960]} sizes="(max-width: 960px) 92vw, 600px" alt={`${escritorio.advogado}, advogado, sorrindo, sentado em uma poltrona no escritório`} loading="eager" fetchpriority="high" />
+      </div>
+      <figcaption><b>{escritorio.advogado}</b><span class="muted">{escritorio.oab}</span></figcaption>
+    </figure>
+  </section>
+
+  <div class="band">
+    <div class="wrap valores">
+      <div data-reveal style="--i:0"><strong>Atendimento direto</strong><span>Você fala com o advogado responsável pelo seu caso, do início ao fim.</span></div>
+      <div data-reveal style="--i:1"><strong>Todo o Brasil</strong><span>Processos eletrônicos, reunião por vídeo e contratos assinados eletronicamente.</span></div>
+      <div data-reveal style="--i:2"><strong>Clareza</strong><span>Riscos, prazos e honorários explicados por escrito antes de qualquer assinatura.</span></div>
+    </div>
+  </div>
+
+  <section class="sec" id="areas" aria-labelledby="t-areas">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="label">Áreas de atuação</span>
+        <h2 class="h2" id="t-areas">Atendimento técnico e humanizado em todas as áreas, do primeiro contato à conclusão do caso</h2>
+        <p>Cada área tem uma página com o que fazer primeiro, os documentos necessários e as perguntas mais comuns.</p>
+      </div>
+      <div class="areas">
+        <a class="area area-dest" href={`/${destaque.id}/`} data-reveal>
+          <div>
+            <span class="label label-gold">Área principal</span>
+            <h3 class="h3">{destaque.data.nome}</h3>
+            <p>{destaque.data.resumoCard}</p>
+            <span class="more">{destaque.data.chamadaCard} →</span>
+          </div>
+          <ul class="lista">{destaque.data.listaCard?.map((i) => <li>{i}</li>)}</ul>
+        </a>
+        {outras.map((a, i) => (
+          <a class="area" href={`/${a.id}/`} data-reveal style={`--i:${i % 3}`}>
+            <h3 class="h3">{a.data.nome}</h3>
+            <p>{a.data.resumoCard}</p>
+            <span class="more">{a.data.chamadaCard} →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Etapas escura />
+
+  <Advogado />
+
+  <section class="night" aria-labelledby="t-capital">
+    <div class="wrap capital">
+      <div data-reveal>
+        <span class="label">Brasília · DF</span>
+        <h2 class="h2" id="t-capital">Na capital do país, perto de onde as decisões acontecem.</h2>
+        <p>Escritório no Lago Norte, com atendimento presencial com horário marcado. Para quem está em outro estado, todo o atendimento é feito a distância, com a mesma proximidade.</p>
+      </div>
+      <figure data-reveal>
+        <Picture src={congresso} formats={['avif', 'webp']} widths={[640, 960, 1280]} sizes="(max-width: 960px) 92vw, 640px" alt="Congresso Nacional, em Brasília, refletido no espelho d'água" loading="lazy" />
+        <figcaption>Congresso Nacional · Foto: Gustavo Leighton / Unsplash</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  {artigos.length > 0 && (
+    <section class="sec" aria-labelledby="t-artigos">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <span class="label">Artigos</span>
+          <h2 class="h2" id="t-artigos">Orientações para entender o seu caso</h2>
+        </div>
+        <div class="posts">
+          {artigos.map((a) => (
+            <a class="post" href={`/artigos/${a.id}/`} data-reveal>
+              <span class="label label-gold">{areas.find((x) => x.id === a.data.area)?.data.nome}</span>
+              <h3 class="h3">{a.data.title}</h3>
+              <p>{a.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Faq itens={faq} titulo="Antes de entrar em contato" />
+
+  <Chamada titulo="Precisa de orientação jurídica?" texto="Envie seu caso pelo WhatsApp. Eu mesmo leio e respondo." />
+</Base>

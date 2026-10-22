@@ -1,0 +1,36 @@
+ordem: 3
+nome: Direito do consumidor
+resumoCard: Cobranças indevidas, negativação, produtos com defeito e golpes bancários.
+seoTitulo: Advogado do consumidor em Brasília | Figueiredo Lima
+seoDescricao: Cobrança indevida, nome negativado, produto com defeito ou golpe bancário? Entenda seus direitos e fale direto com o advogado.
+sobretitulo: Direito do consumidor · Brasília e todo o Brasil
+h1: Advogado do consumidor em Brasília
+abertura: "Cobrança que você não reconhece, nome negativado sem dívida, compra que não chegou ou golpe no banco: explico o que o Código de Defesa do Consumidor garante e qual é o melhor caminho para o seu caso."
+botao: Falar sobre o meu caso
+mensagemWhatsApp: Olá! Vim pelo site e preciso de orientação sobre um problema de consumo.
+foto: principal
+situacoes:
+  - { titulo: Cobranças indevidas e negativação do nome }
+  - { titulo: Produtos com defeito ou não entregues }
+  - { titulo: Golpes em transações bancárias }
+  - { titulo: Serviços não prestados ou cancelamentos recusados }
+frentesTitulo: Como atuo
+frentes:
+  - { titulo: "Reclamação à empresa e nos canais oficiais, como Procon e consumidor.gov.br" }
+  - { titulo: "Acordo antes do processo, quando possível" }
+  - { titulo: "Ação judicial, inclusive no Juizado Especial" }
+documentos:
+  - Comprovantes de pagamento e faturas
+  - Prints de conversas e e-mails
+  - Números de protocolo
+  - Boletim de ocorrência, no caso de golpe
+faq:
+  - pergunta: Paguei uma cobrança indevida. Tenho direito à devolução?
+    resposta: O consumidor cobrado em quantia indevida tem direito à devolução em dobro do que pagou a mais, com correção e juros, salvo engano justificável do fornecedor (CDC, art. 42, parágrafo único).
+  - pergunta: Posso desistir de uma compra feita pela internet?
+    resposta: Nas compras feitas fora da loja física, como pela internet ou por telefone, o consumidor pode desistir em até 7 dias da assinatura ou do recebimento, com devolução imediata do que pagou (CDC, art. 49).
+  - pergunta: Fui vítima de golpe no banco. O que fazer primeiro?
+    resposta: Avise o banco pelos canais oficiais, registre boletim de ocorrência e guarde comprovantes, prints e protocolos. A análise do caso indica se cabe pedir o ressarcimento.
+chamadaTitulo: Teve um problema com uma empresa ou com o banco?
+chamadaTexto: Conte o que aconteceu pelo WhatsApp. Eu mesmo leio e respondo.
+avisoRodape: As informações desta página não substituem a análise individual de cada caso. Informações jurídicas conferidas em outubro de 2026.

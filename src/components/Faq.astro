@@ -1,0 +1,17 @@
+---
+// Perguntas frequentes em acordeão nativo (<details>): funciona sem JavaScript e pelo teclado.
+// faqJsonLd() gera os mesmos textos como dados estruturados FAQPage.
+interface Props { itens: { pergunta: string; resposta: string }[]; sobretitulo?: string; titulo: string; id?: string }
+const { itens, sobretitulo = 'Perguntas frequentes', titulo, id = 't-faq' } = Astro.props;
+---
+<section class="sec" aria-labelledby={id}>
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="label">{sobretitulo}</span>
+      <h2 class="h2" id={id}>{titulo}</h2>
+    </div>
+    <div class="faq">
+      {itens.map((i) => <details><summary>{i.pergunta}</summary><p>{i.resposta}</p></details>)}
+    </div>
+  </div>
+</section>

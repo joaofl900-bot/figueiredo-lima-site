@@ -1,0 +1,104 @@
+---
+// Molde de todas as páginas: <head> com título, descrição, endereço oficial (canonical),
+// Open Graph e dados estruturados; depois cabeçalho, conteúdo, rodapé e botão flutuante.
+import { getCollection } from 'astro:content';
+import Cabecalho from '../components/Cabecalho.astro';
+import Rodape from '../components/Rodape.astro';
+import BotaoWhatsApp from '../components/BotaoWhatsApp.astro';
+import { escritorio } from '../data/escritorio';
+import '../styles/site.css';
+
+interface Props {
+  titulo: string;
+  descricao: string;
+  // Dados estruturados extras da página (FAQ, trilha, artigo...). O escritório e o advogado entram sempre.
+  jsonld?: Record<string, unknown>[];
+  mensagemWhatsApp?: string;
+  rotuloFlutuante?: string;
+  noindex?: boolean;
+  avisoRodape?: string;
+  imagemOg?: string;
+  tipoOg?: 'website' | 'article';
+}
+const {
+  titulo, descricao, jsonld = [], mensagemWhatsApp, rotuloFlutuante = 'Falar no WhatsApp',
+  noindex = false, avisoRodape, imagemOg = '/joao-retrato.jpg', tipoOg = 'website',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const temArtigos = (await getCollection('artigos', ({ data }) => !data.draft)).length > 0;
+
+const ID_ESCRITORIO = `${escritorio.site}/#escritorio`;
+const ID_ADVOGADO = `${escritorio.site}/#advogado`;
+const grafo = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'LegalService',
+      '@id': ID_ESCRITORIO,
+      name: escritorio.marca,
+      legalName: escritorio.razaoSocial,
+      taxID: escritorio.cnpj,
+      url: `${escritorio.site}/`,
+      logo: `${escritorio.site}/logo-figueiredo-lima.png`,
+      image: `${escritorio.site}/joao-retrato.jpg`,
+      telephone: escritorio.telefoneE164,
+      email: escritorio.email,
+      address: { '@type': 'PostalAddress', addressLocality: escritorio.cidade, addressRegion: escritorio.uf, addressCountry: 'BR' },
+      areaServed: { '@type': 'Country', name: 'Brasil' },
+      founder: { '@id': ID_ADVOGADO },
+      sameAs: [escritorio.instagram],
+    },
+    {
+      '@type': 'Person',
+      '@id': ID_ADVOGADO,
+      name: escritorio.advogado,
+      jobTitle: 'Advogado',
+      identifier: escritorio.oab,
+      worksFor: { '@id': ID_ESCRITORIO },
+      alumniOf: { '@type': 'CollegeOrUniversity', name: 'IDP' },
+      knowsAbout: ['Direito tributário', 'Planos de saúde', 'Direito do consumidor', 'Leilões de imóveis', 'Direito público', 'Direito civil'],
+      sameAs: [escritorio.instagram],
+    },
+    ...jsonld,
+  ],
+};
+---
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{titulo}</title>
+  <meta name="description" content={descricao}>
+  {noindex ? <meta name="robots" content="noindex, follow"> : <link rel="canonical" href={canonical}>}
+  <meta name="theme-color" content="#F3EEE6">
+  <link rel="icon" type="image/png" href="/logo-figueiredo-lima-503.png">
+  <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/public-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <meta property="og:type" content={tipoOg}>
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content={escritorio.marca}>
+  <meta property="og:title" content={titulo}>
+  <meta property="og:description" content={descricao}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content={new URL(imagemOg, Astro.site).href}>
+  <meta property="og:image:alt" content={`${escritorio.advogado}, advogado`}>
+  <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
+  <script type="application/ld+json" set:html={JSON.stringify(grafo)} />
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.42 1.3-1.95 1.34-.5.05-.97.23-3.27-.68-2.77-1.09-4.52-3.92-4.66-4.1-.13-.18-1.11-1.48-1.11-2.83 0-1.34.71-2 .96-2.28.24-.27.53-.34.71-.34l.51.01c.16.01.38-.06.6.46.24.55.79 1.9.86 2.04.07.14.11.3.02.48-.09.18-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.28-.12.56.16.27.71 1.17 1.52 1.89 1.05.93 1.93 1.22 2.2 1.36.27.14.43.11.59-.07.16-.18.68-.79.86-1.07.18-.27.36-.23.6-.14.25.09 1.58.75 1.85.88.27.14.45.2.52.32.07.11.07.66-.17 1.33z"></path></symbol>
+  </svg>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <slot name="antes-do-cabecalho" />
+  <Cabecalho mensagem={mensagemWhatsApp} temArtigos={temArtigos} />
+  <main id="conteudo">
+    <slot />
+  </main>
+  <Rodape temArtigos={temArtigos} aviso={avisoRodape} />
+  <BotaoWhatsApp rotulo={rotuloFlutuante} mensagem={mensagemWhatsApp} local="flutuante" classe="wa-float" />
+  <script src="../scripts/site.js"></script>
+</body>
+</html>

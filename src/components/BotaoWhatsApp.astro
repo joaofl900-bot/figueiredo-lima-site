@@ -1,0 +1,24 @@
+---
+// Botão de WhatsApp. "local" identifica o botão na medição (cabeçalho, abertura, chamada...).
+// "ancora" marca os botões que, quando visíveis, escondem o botão flutuante do celular.
+import { linkWhatsApp } from '../data/escritorio';
+
+interface Props {
+  rotulo: string;
+  mensagem?: string;
+  local: string;
+  grande?: boolean;
+  ancora?: boolean;
+  classe?: string;
+}
+const { rotulo, mensagem, local, grande = false, ancora = false, classe = '' } = Astro.props;
+---
+<a
+  class:list={['btn', 'btn-wa', { 'btn-lg': grande }, classe]}
+  href={linkWhatsApp(mensagem)}
+  target="_blank"
+  rel="noopener"
+  data-evento="clique_whatsapp"
+  data-local={local}
+  data-wa-ancora={ancora ? '' : undefined}
+><svg aria-hidden="true"><use href="#i-wa"></use></svg>{rotulo}</a>

@@ -1,0 +1,36 @@
+ordem: 4
+nome: Leilões de imóveis
+resumoCard: Análise do edital, das dívidas e da ocupação, do lance até o registro do imóvel.
+seoTitulo: Advogado para compra de imóvel em leilão | Figueiredo Lima
+seoDescricao: Análise do edital, das dívidas e da ocupação antes do lance, compra sem lance por proposta no processo, registro e imissão na posse. Atendimento em todo o Brasil.
+sobretitulo: Leilões de imóveis · atendimento em todo o Brasil
+h1: Advogado para compra de imóvel em leilão
+abertura: Comprar em leilão judicial pode ser uma boa oportunidade, desde que você conheça os riscos antes do lance. Analiso o processo, o edital e o imóvel e acompanho tudo até o registro em seu nome.
+botao: Falar sobre um leilão
+mensagemWhatsApp: Olá! Vim pelo site e quero orientação sobre a compra de um imóvel em leilão.
+foto: close
+situacoes:
+  - { titulo: Avaliar um imóvel antes de dar lance }
+  - { titulo: Dívidas de condomínio e IPTU }
+  - { titulo: Imóvel ocupado }
+  - { titulo: Leilão que terminou sem lance }
+  - { titulo: Registro e imissão na posse depois da arrematação }
+frentesTitulo: Como atuo
+frentes:
+  - { titulo: "Análise prévia do processo, do edital e da matrícula" }
+  - { titulo: Proposta no processo quando o leilão termina sem lance }
+  - { titulo: "Acompanhamento da arrematação, do registro e da imissão na posse" }
+documentos:
+  - Link do edital ou número do processo
+  - Matrícula do imóvel, se tiver
+  - Dados da arrematação, se já houve
+faq:
+  - pergunta: Dá para comprar um imóvel depois de um leilão sem lance?
+    resposta: Em muitos casos, sim. Se não houver adjudicação, o credor pode pedir a venda por iniciativa particular ou por corretor ou leiloeiro credenciado, com prazo, preço mínimo e condições fixados pelo juiz (CPC, art. 880). A proposta é apresentada no próprio processo.
+  - pergunta: Quem paga as dívidas do imóvel?
+    resposta: Depende do que diz o edital e do tipo de dívida. Por isso a análise do edital e da matrícula vem antes do lance.
+  - pergunta: E se o imóvel estiver ocupado?
+    resposta: A ocupação não impede a compra, mas muda o prazo e o custo. A desocupação pode ser pedida ao juiz, por meio da imissão na posse.
+chamadaTitulo: Encontrou um imóvel em leilão?
+chamadaTexto: Envie o edital pelo WhatsApp antes de dar o lance.
+avisoRodape: As informações desta página não substituem a análise individual de cada caso. Informações jurídicas conferidas em outubro de 2026.

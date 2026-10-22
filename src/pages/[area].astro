@@ -1,0 +1,150 @@
+---
+// Modelo das seis páginas de área (/tributario/, /planos-de-saude/...). O texto de cada uma
+// fica em src/content/areas/<nome>.yaml; esta página só monta as seções na ordem aprovada.
+import { Picture } from 'astro:assets';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import BotaoWhatsApp from '../components/BotaoWhatsApp.astro';
+import AvisoSimples from '../components/AvisoSimples.astro';
+import Etapas from '../components/Etapas.astro';
+import Advogado from '../components/Advogado.astro';
+import Faq from '../components/Faq.astro';
+import Chamada from '../components/Chamada.astro';
+import close from '../assets/fotos/joao-close.jpg';
+import principal from '../assets/fotos/joao-principal.jpg';
+import couro from '../assets/fotos/joao-couro.jpg';
+import { escritorio } from '../data/escritorio';
+
+export async function getStaticPaths() {
+  const areas = await getCollection('areas');
+  return areas.map((area) => ({ params: { area: area.id }, props: { area } }));
+}
+
+const { area } = Astro.props as { area: CollectionEntry<'areas'> };
+const d = area.data;
+const fotos = { close, principal, couro };
+const posicao = { close: '50% 38%', principal: '50% 28%', couro: '50% 62%' }[d.foto];
+const comTexto = (lista: { texto?: string }[]) => lista.some((i) => i.texto);
+const relacionados = (await getCollection('artigos', ({ data }) => !data.draft && data.area === area.id))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const url = `${escritorio.site}/${area.id}/`;
+const jsonld = [
+  {
+    '@type': 'Service',
+    '@id': `${url}#servico`,
+    name: d.nome,
+    serviceType: d.nome,
+    url,
+    description: d.seoDescricao,
+    areaServed: { '@type': 'Country', name: 'Brasil' },
+    provider: { '@id': `${escritorio.site}/#escritorio` },
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Início', item: `${escritorio.site}/` },
+      { '@type': 'ListItem', position: 2, name: d.nome, item: url },
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.pergunta, acceptedAnswer: { '@type': 'Answer', text: f.resposta } })),
+  },
+];
+---
+<Base titulo={d.seoTitulo} descricao={d.seoDescricao} jsonld={jsonld} mensagemWhatsApp={d.mensagemWhatsApp} rotuloFlutuante={d.botao} avisoRodape={d.avisoRodape}>
+  {d.avisoSimples && <AvisoSimples slot="antes-do-cabecalho" />}
+
+  <section class="wrap" style="padding-top: 32px;" aria-labelledby="titulo">
+    <nav class="trilha" aria-label="Trilha de navegação">
+      <ol><li><a href="/">Início</a></li><li><a href="/#areas">Áreas</a></li><li aria-current="page">{d.nome}</li></ol>
+    </nav>
+    <div class="hero" style="padding-top: 0;">
+      <div class="hero-text">
+        <span class="label label-gold">{d.sobretitulo}</span>
+        <h1 class="h1" id="titulo">{d.h1}</h1>
+        <p class="lead">{d.abertura}</p>
+        <div class="hero-actions">
+          <BotaoWhatsApp rotulo={d.botao} mensagem={d.mensagemWhatsApp} local="abertura" grande ancora />
+          {d.linkSecundario && <a class="link" href={d.linkSecundario.href}>{d.linkSecundario.rotulo}</a>}
+        </div>
+        <p class="micro">{d.apoio}</p>
+      </div>
+      <figure class="frame">
+        <div class="crop" style="aspect-ratio: 4 / 5;">
+          <Picture src={fotos[d.foto]} formats={['avif', 'webp']} widths={[480, 640, 960]} sizes="(max-width: 960px) 92vw, 420px" alt={`${escritorio.advogado}, advogado, no escritório`} loading="eager" fetchpriority="high" style={`object-position: ${posicao}`} />
+        </div>
+        <figcaption><b>{escritorio.advogado}</b><span class="muted">{escritorio.oab}</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec" style="border-top: 1px solid var(--line);" aria-labelledby="t-situacoes">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="label">Para quem é</span>
+        <h2 class="h2" id="t-situacoes">Situações mais comuns</h2>
+        {d.situacoesIntro && <p>{d.situacoesIntro}</p>}
+      </div>
+      {comTexto(d.situacoes)
+        ? <div class="areas">{d.situacoes.map((s, i) => <div class="area" data-reveal style={`--i:${i % 3}`}><h3 class="h3">{s.titulo}</h3><p>{s.texto}</p></div>)}</div>
+        : <ul class="lista lista-2col" data-reveal>{d.situacoes.map((s) => <li>{s.titulo}</li>)}</ul>}
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="t-atuacao">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="label">Como o escritório atua</span>
+        <h2 class="h2" id="t-atuacao">{d.frentesTitulo}</h2>
+        {d.frentesIntro && <p>{d.frentesIntro}</p>}
+      </div>
+      {comTexto(d.frentes)
+        ? <div class="frentes">{d.frentes.map((f, i) => <div data-reveal style={`--i:${i}`}><h3 class="h3">{f.titulo}</h3><p class="small muted">{f.texto}</p></div>)}</div>
+        : <ul class="lista lista-lg" data-reveal>{d.frentes.map((f) => <li>{f.titulo}</li>)}</ul>}
+    </div>
+  </section>
+
+  {d.destaque && (
+    <section class="night" id={d.destaque.id} aria-labelledby="t-destaque">
+      <div class="wrap sec duas-col">
+        <div data-reveal style="display: flex; flex-direction: column; gap: 18px;">
+          <span class="label">{d.destaque.sobretitulo}</span>
+          <h2 class="h2" id="t-destaque">{d.destaque.titulo}</h2>
+          {d.destaque.paragrafos.map((p) => <p>{p}</p>)}
+          {d.destaque.nota && <p class="small">{d.destaque.nota}</p>}
+        </div>
+        <ul class="lista lista-lg" data-reveal style="color: var(--on-night);">{d.destaque.itens.map((i) => <li>{i}</li>)}</ul>
+      </div>
+    </section>
+  )}
+
+  <section class="sec" aria-labelledby="t-docs">
+    <div class="wrap duas-col">
+      <div class="sec-head" style="margin: 0;" data-reveal>
+        <span class="label">Documentos</span>
+        <h2 class="h2" id="t-docs">O que separar para a primeira análise</h2>
+        <p>Não precisa ter tudo. Comece com o que estiver à mão; o resto é pedido na conversa.</p>
+      </div>
+      <ul class="lista lista-lg" data-reveal style="align-self: center;">{d.documentos.map((i) => <li>{i}</li>)}</ul>
+    </div>
+  </section>
+
+  <Etapas itens={d.etapas} titulo="Como funciona o atendimento" id="etapas" />
+
+  <Advogado titulo="Advogado responsável" mestrado={d.mestrado} foto="principal" id="advogado" />
+
+  <Faq itens={d.faq} titulo={d.faqTitulo} />
+
+  {relacionados.length > 0 && (
+    <section class="sec" aria-labelledby="t-relacionados">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">Artigos</span><h2 class="h2" id="t-relacionados">Para entender melhor</h2></div>
+        <div class="posts">{relacionados.map((a) => <a class="post" href={`/artigos/${a.id}/`}><h3 class="h3">{a.data.title}</h3><p>{a.data.description}</p></a>)}</div>
+      </div>
+    </section>
+  )}
+
+  <Chamada titulo={d.chamadaTitulo} texto={d.chamadaTexto} mensagem={d.mensagemWhatsApp} />
+</Base>

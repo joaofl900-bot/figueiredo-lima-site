@@ -1,0 +1,56 @@
+---
+// Aviso de privacidade (LGPD). Texto do site atual, ajustado ao novo site; revisão completa na Fase 7.
+import Base from '../layouts/Base.astro';
+import { escritorio } from '../data/escritorio';
+---
+<Base titulo="Aviso de privacidade | Figueiredo Lima Advocacia" descricao="Como o site figueiredolima.adv.br trata dados pessoais, nos termos da Lei Geral de Proteção de Dados (Lei nº 13.709/2018).">
+  <section class="sec" aria-labelledby="titulo">
+    <div class="wrap texto">
+      <span class="label">Privacidade</span>
+      <h1 class="h1" id="titulo">Aviso de privacidade</h1>
+      <p>Este aviso explica como o site figueiredolima.adv.br trata dados pessoais, nos termos da Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018).</p>
+
+      <h2>Responsável pelo tratamento</h2>
+      <p>{escritorio.razaoSocial} ({escritorio.marca}), CNPJ {escritorio.cnpj}, {escritorio.bairro}, {escritorio.cidade}/{escritorio.uf}. Advogado responsável: {escritorio.advogado}, {escritorio.oab}.</p>
+      <p>Canal para assuntos de privacidade e solicitações dos titulares: {escritorio.email} (assunto "Privacidade").</p>
+
+      <h2>Quais dados, para quê e com que base legal</h2>
+      <ul class="lista lista-lg">
+        <li>Dados técnicos de acesso (endereço IP, navegador, data e hora), registrados pelo provedor de hospedagem para segurança e funcionamento do site, e estatísticas agregadas de visitas e desempenho das páginas (Cloudflare Web Analytics, sem cookies). Base legal: legítimo interesse (art. 7º, IX, da LGPD).</li>
+        <li>Origem da visita (parâmetros da campanha, como nome da campanha e termo pesquisado). A mensagem pronta do WhatsApp muda conforme a página de origem, o que permite saber de onde veio cada contato, sem identificar você. Base legal: legítimo interesse (art. 7º, IX).</li>
+        <li>Dados que você envia por WhatsApp, e-mail ou telefone (nome, telefone, e-mail, dados da empresa e informações sobre o caso). Servem para responder, avaliar a demanda e, se você quiser, preparar uma proposta de serviços. Base legal: procedimentos preliminares relacionados a contrato, a pedido do titular (art. 7º, V). Essas informações também são protegidas pelo sigilo profissional do advogado.</li>
+        <li>Cookies de medição do Google Analytics e do Google Ads. Hoje não estão ativos. Se forem ativados, só funcionarão depois que você clicar em "Aceitar" no aviso exibido, e recusar não impede a navegação. Base legal: consentimento (art. 7º, I), que pode ser revogado a qualquer momento.</li>
+      </ul>
+
+      <h2>Fornecedores</h2>
+      <ul class="lista lista-lg">
+        <li>Cloudflare: hospedagem, entrega do site e estatísticas agregadas de visitas, sem cookies.</li>
+        <li>Meta (WhatsApp) e Google (Gmail): troca de mensagens e e-mails com o escritório.</li>
+        <li>Google (Analytics e Ads): medição de visitas e anúncios, apenas se ativada e autorizada por você.</li>
+      </ul>
+      <p>Esses fornecedores podem tratar dados fora do Brasil, conforme as próprias políticas e as hipóteses do art. 33 da LGPD.</p>
+
+      <h2>Armazenamento e prazos</h2>
+      <ul class="lista lista-lg">
+        <li>A origem da visita fica no seu navegador só durante a visita e é apagada ao fechar a aba.</li>
+        <li>A escolha sobre cookies fica salva no seu navegador até você apagá-la.</li>
+        <li>Mensagens e documentos de contato são mantidos pelo tempo necessário ao atendimento e, se houver contratação, pelos prazos exigidos para o exercício da advocacia e a defesa de direitos.</li>
+      </ul>
+
+      <h2>Seus direitos</h2>
+      <p>Você pode pedir a confirmação do tratamento, o acesso, a correção, a anonimização, a portabilidade ou a eliminação dos seus dados, informações sobre compartilhamento e a revogação do consentimento, entre os demais direitos do art. 18 da LGPD, pelo canal indicado acima. Você também pode apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).</p>
+
+      <h2>Rever a autorização de cookies</h2>
+      <p>Se você autorizou ou recusou os cookies de medição, pode apagar a sua escolha neste navegador.</p>
+      <p><button class="copiar" type="button" id="limpar">Apagar minha escolha sobre cookies</button> <span id="limpo" role="status"></span></p>
+
+      <p class="small muted">Atualizado em 22 de outubro de 2026.</p>
+    </div>
+  </section>
+  <script is:inline>
+    document.getElementById('limpar').addEventListener('click', function () {
+      try { localStorage.removeItem('fl_consentimento'); } catch (e) {}
+      document.getElementById('limpo').textContent = 'Sua escolha foi apagada.';
+    });
+  </script>
+</Base>

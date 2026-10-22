@@ -1,0 +1,35 @@
+ordem: 6
+nome: Cível
+resumoCard: Contratos, indenizações, cobranças e execuções, buscando primeiro o acordo.
+seoTitulo: Advogado cível em Brasília | Figueiredo Lima
+seoDescricao: Contratos, indenizações, cobranças e execuções, buscando primeiro o acordo. Atendimento direto com o advogado, em Brasília e on-line.
+sobretitulo: Cível · Brasília e todo o Brasil
+h1: Advogado cível em Brasília
+abertura: "Para conflitos entre pessoas e empresas: contratos, indenizações e cobranças. Busco primeiro o acordo e, quando necessário, a solução judicial."
+botao: Falar sobre o meu caso
+mensagemWhatsApp: Olá! Vim pelo site e preciso de orientação sobre uma questão cível.
+foto: close
+situacoes:
+  - { titulo: Contrato descumprido }
+  - { titulo: Elaboração e revisão de contratos }
+  - { titulo: Indenização por danos materiais e morais }
+  - { titulo: Cobrança e execução de dívidas }
+frentesTitulo: Como atuo
+frentes:
+  - { titulo: Análise e revisão de contratos }
+  - { titulo: Notificação e negociação }
+  - { titulo: Ação judicial e acompanhamento da execução }
+documentos:
+  - Contrato
+  - Comprovantes de pagamento
+  - Conversas, e-mails e notificações trocadas
+faq:
+  - pergunta: Vale tentar um acordo antes de entrar na Justiça?
+    resposta: Muitas vezes, sim. A notificação formal também registra a tentativa de resolver sem processo.
+  - pergunta: Vocês elaboram contratos?
+    resposta: Sim, elaboração e revisão de contratos para pessoas e empresas.
+  - pergunta: Existe prazo para entrar com a ação?
+    resposta: Sim. A lei fixa prazos de prescrição que variam conforme o tipo de pedido, por isso vale buscar orientação logo.
+chamadaTitulo: Tem um contrato ou uma cobrança para resolver?
+chamadaTexto: Conte o caso pelo WhatsApp.
+avisoRodape: As informações desta página não substituem a análise individual de cada caso.

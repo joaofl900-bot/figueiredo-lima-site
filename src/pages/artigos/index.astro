@@ -1,0 +1,33 @@
+---
+// Lista de artigos publicados, do mais recente ao mais antigo. Enquanto não houver nenhum,
+// a página fica fora do Google e do menu.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const areas = await getCollection('areas');
+const artigos = (await getCollection('artigos', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const nomeArea = (id: string) => areas.find((a) => a.id === id)?.data.nome ?? '';
+const data = (d: Date) => d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+<Base titulo="Artigos | Figueiredo Lima Advocacia" descricao="Orientações em linguagem simples sobre direito tributário, planos de saúde, consumidor, leilões de imóveis, direito público e cível." noindex={artigos.length === 0}>
+  <section class="sec" aria-labelledby="titulo">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Artigos</span>
+        <h1 class="h1" id="titulo">Orientações para entender o seu caso</h1>
+        <p>Textos informativos, em linguagem simples, escritos pelo advogado.</p>
+      </div>
+      {artigos.length === 0
+        ? <p class="muted">Ainda não há artigos publicados.</p>
+        : <div class="posts">{artigos.map((a) => (
+            <a class="post" href={`/artigos/${a.id}/`}>
+              <span class="label label-gold">{nomeArea(a.data.area)}</span>
+              <h2 class="h3">{a.data.title}</h2>
+              <p>{a.data.description}</p>
+              <span class="micro">{data(a.data.date)}</span>
+            </a>
+          ))}</div>}
+    </div>
+  </section>
+</Base>

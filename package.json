@@ -1,0 +1,22 @@
+{
+  "name": "figueiredo-lima-site",
+  "private": true,
+  "type": "module",
+  "description": "Site da Figueiredo Lima Advocacia (figueiredolima.adv.br), feito com Astro e publicado na Cloudflare.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "astro build && wrangler deploy"
+  },
+  "dependencies": {
+    "astro": "7.3.8",
+    "@astrojs/sitemap": "3.7.4"
+  },
+  "devDependencies": {
+    "wrangler": "4.151.3"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

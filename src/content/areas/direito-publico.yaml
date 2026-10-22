@@ -1,0 +1,38 @@
+ordem: 5
+nome: Direito público
+resumoCard: Licitações, contratos administrativos, concursos e processos administrativos.
+seoTitulo: Advogado de licitações e direito público em Brasília | Figueiredo Lima
+seoDescricao: Impugnação de edital, recursos em licitação, contratos administrativos, concursos públicos e processos administrativos. Atendimento direto com o advogado.
+sobretitulo: Direito público · Brasília e todo o Brasil
+h1: Advogado de licitações e direito público em Brasília
+abertura: Para empresas que contratam com o governo e para cidadãos diante de atos da Administração. Nas licitações, os prazos são de poucos dias úteis, e a análise do edital precisa vir cedo.
+botao: Falar sobre a licitação ou o concurso
+mensagemWhatsApp: Olá! Vim pelo site e preciso de orientação em direito público.
+foto: close
+situacoes:
+  - { titulo: Edital com exigências irregulares }
+  - { titulo: Inabilitação ou desclassificação na licitação }
+  - { titulo: "Contrato administrativo, com reequilíbrio, aditivos e sanções" }
+  - { titulo: Concurso público }
+  - { titulo: Processo administrativo }
+frentesTitulo: Como atuo
+frentes:
+  - { titulo: Impugnações e pedidos de esclarecimento }
+  - { titulo: Recursos administrativos }
+  - { titulo: Defesa em processos de sanção }
+  - { titulo: "Ações judiciais, quando cabíveis" }
+documentos:
+  - Edital e anexos
+  - Atas, decisões e comunicações do órgão
+  - Contrato e aditivos
+  - No concurso, o edital e o resultado
+faq:
+  - pergunta: Qual é o prazo para impugnar um edital de licitação?
+    resposta: Qualquer pessoa pode impugnar o edital até 3 dias úteis antes da abertura do certame (Lei nº 14.133/2021, art. 164).
+  - pergunta: Qual é o prazo para recorrer na licitação?
+    resposta: Em regra, 3 dias úteis contados da intimação ou da lavratura da ata, por exemplo contra o julgamento das propostas ou a inabilitação (Lei nº 14.133/2021, art. 165, I).
+  - pergunta: Vocês atendem candidatos de concurso público?
+    resposta: Sim. A análise começa pelo edital e pela decisão que se quer questionar.
+chamadaTitulo: O prazo da licitação está correndo?
+chamadaTexto: Envie o edital pelo WhatsApp.
+avisoRodape: As informações desta página não substituem a análise individual de cada caso. Informações jurídicas conferidas em outubro de 2026.

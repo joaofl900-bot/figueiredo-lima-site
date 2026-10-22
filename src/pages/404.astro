@@ -1,0 +1,19 @@
+---
+// Página para endereços que não existem (links quebrados).
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import BotaoWhatsApp from '../components/BotaoWhatsApp.astro';
+
+const areas = (await getCollection('areas')).sort((a, b) => a.data.ordem - b.data.ordem);
+---
+<Base titulo="Página não encontrada | Figueiredo Lima Advocacia" descricao="O endereço procurado não existe. Veja as áreas de atuação ou fale com o advogado." noindex>
+  <section class="sec" aria-labelledby="titulo">
+    <div class="wrap texto">
+      <span class="label">Erro 404</span>
+      <h1 class="h1" id="titulo">Esta página não existe</h1>
+      <p>O endereço pode ter mudado. Veja as áreas de atuação abaixo ou fale direto com o advogado.</p>
+      <ul class="lista lista-lg">{areas.map((a) => <li><a href={`/${a.id}/`}>{a.data.nome}</a></li>)}</ul>
+      <p><BotaoWhatsApp rotulo="Falar com o advogado no WhatsApp" local="404" ancora /></p>
+    </div>
+  </section>
+</Base>

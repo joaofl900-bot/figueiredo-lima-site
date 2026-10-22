@@ -1,0 +1,17 @@
+---
+// Faixa do Simples Nacional no topo da página do tributário (como na landing dos anúncios).
+// O aviso com prazo some sozinho depois de "ate"; a versão permanente aparece no lugar.
+// Para um novo prazo da Receita, troque o texto e a data abaixo.
+import { linkWhatsApp } from '../data/escritorio';
+const ate = '2026-10-31T00:00:00-03:00';
+---
+<div class="aviso" role="region" aria-label="Aviso sobre o Simples Nacional">
+  <div class="wrap aviso-in" data-ate={ate}>
+    <p><strong>Simples Nacional 2027: pedido de opção indeferido por pendências?</strong> Empresas que pediram a opção no prazo podem regularizar até 30/10/2026, segundo a Receita Federal.</p>
+    <a class="btn btn-night" href={linkWhatsApp('Olá! Vim pelo site e quero falar sobre o indeferimento no Simples Nacional.')} target="_blank" rel="noopener" data-evento="clique_whatsapp" data-local="aviso-simples"><svg aria-hidden="true"><use href="#i-wa"></use></svg>Falar sobre o indeferimento</a>
+  </div>
+  <div class="wrap aviso-in" data-depois hidden>
+    <p><strong>Simples Nacional: débitos podem levar à exclusão do regime.</strong> Entenda como regularizar a tempo.</p>
+    <a class="btn btn-night" href={linkWhatsApp('Olá! Vim pelo site e quero falar sobre o Simples Nacional da minha empresa.')} target="_blank" rel="noopener" data-evento="clique_whatsapp" data-local="aviso-simples"><svg aria-hidden="true"><use href="#i-wa"></use></svg>Falar sobre o Simples Nacional</a>
+  </div>
+</div>

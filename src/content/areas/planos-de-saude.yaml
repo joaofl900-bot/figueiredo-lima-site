@@ -1,0 +1,37 @@
+ordem: 2
+nome: Planos de saúde
+resumoCard: Para quem teve um tratamento negado ou um reajuste que merece revisão.
+seoTitulo: Advogado de planos de saúde em Brasília | Figueiredo Lima
+seoDescricao: Tratamento, exame ou cirurgia negados pelo plano? Reajuste alto? Entenda seus direitos e fale direto com o advogado. Brasília e on-line em todo o Brasil.
+sobretitulo: Planos de saúde · Brasília e todo o Brasil
+h1: Advogado de planos de saúde em Brasília
+abertura: Se o plano negou um tratamento ou aumentou muito a mensalidade, você não precisa enfrentar isso sozinho. Explico o que a lei e o seu contrato dizem e quais caminhos existem, inclusive quando há urgência.
+botao: Falar sobre o meu plano
+mensagemWhatsApp: Olá! Vim pelo site e preciso de orientação sobre o meu plano de saúde.
+foto: principal
+situacoes:
+  - { titulo: "Tratamento, exame ou cirurgia negados" }
+  - { titulo: Medicamento ou terapia recusados }
+  - { titulo: Reajuste por faixa etária ou anual muito alto }
+  - { titulo: Planos de autogestão de servidores públicos }
+  - { titulo: Descredenciamento de hospital ou médico }
+frentesTitulo: Como atuo
+frentes:
+  - { titulo: Pedido ao plano e reclamação na ANS }
+  - { titulo: "Ação judicial com pedido de urgência, quando o caso exige" }
+  - { titulo: Revisão de reajustes e pedido de devolução do que foi pago a mais }
+documentos:
+  - Carteirinha e contrato do plano
+  - A negativa por escrito ou o protocolo do atendimento
+  - Relatório e pedido médico, com a indicação e a urgência
+  - Boletos com os últimos reajustes
+faq:
+  - pergunta: O plano pode negar atendimento de urgência ou emergência?
+    resposta: A lei torna obrigatória a cobertura na emergência, quando há risco imediato de vida ou de lesão irreparável declarado pelo médico, e na urgência, decorrente de acidente pessoal ou de complicação na gestação (Lei nº 9.656/1998, art. 35-C). Cada contrato e cada caso precisam ser analisados.
+  - pergunta: O reajuste por mudança de faixa etária é permitido?
+    resposta: O STJ considera válido o reajuste previsto no contrato, que siga as regras da ANS e não use percentuais desarrazoados (Tema 952). Para a pessoa idosa, a lei proíbe cobrar valores diferenciados em razão da idade (Estatuto da Pessoa Idosa, art. 15, § 3º).
+  - pergunta: Em caso urgente, a Justiça pode decidir rápido?
+    resposta: É possível pedir uma decisão provisória logo no início do processo, quando a urgência está comprovada por relatório médico. A decisão depende da análise do juiz em cada caso.
+chamadaTitulo: O plano negou o seu tratamento?
+chamadaTexto: Envie a negativa e o pedido médico pelo WhatsApp. Eu mesmo leio e respondo.
+avisoRodape: As informações desta página não substituem a análise individual de cada caso. Informações jurídicas conferidas em outubro de 2026.

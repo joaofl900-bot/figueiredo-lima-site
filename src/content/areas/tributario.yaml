@@ -1,0 +1,86 @@
+# Área principal. Textos aprovados em 22/10/2026 (Fase 3).
+ordem: 1
+principal: true
+nome: Tributário para empresas
+resumoCard: Para empresas com débitos fiscais, risco de exclusão do Simples Nacional ou certidão travada, com acompanhamento mensal do passivo tributário.
+listaCard:
+  - Dívida ativa da União e parcelamentos
+  - Transação tributária com a PGFN
+  - Regularização para manter o Simples Nacional
+  - Defesa em autuações e cobranças
+  - ICMS na conta de energia de quem gera energia solar
+chamadaCard: Conhecer a assessoria mensal
+seoTitulo: Advogado tributarista em Brasília para empresas | Figueiredo Lima
+seoDescricao: Regularização fiscal, dívida ativa, parcelamento e transação com a PGFN, com assessoria mensal. Atendimento direto com o advogado, em Brasília e on-line.
+sobretitulo: Tributário para empresas · on-line em todo o Brasil
+h1: Regularização fiscal de empresas e assessoria tributária mensal
+abertura: "Débitos na Receita Federal, dívida ativa da União, parcelamento ou transação tributária: fale diretamente com o advogado e entenda as alternativas da sua empresa."
+botao: Falar sobre a minha empresa
+mensagemWhatsApp: Olá! Vim pelo site e gostaria de falar sobre a situação fiscal da minha empresa.
+linkSecundario: { rotulo: Como funciona a assessoria mensal, href: "#assessoria" }
+apoio: Atendimento direto com o advogado · análise e proposta por escrito · trabalho formalizado em contrato
+foto: close
+avisoSimples: true
+situacoesIntro: Estas são as situações que mais levam empresas a procurar orientação jurídica.
+situacoes:
+  - { titulo: Dívida ativa da União, texto: "Inscrição na PGFN, protesto ou execução fiscal." }
+  - { titulo: Certidão negativa travada, texto: "Sem certidão, há barreiras em licitações, crédito e contratos." }
+  - { titulo: Simples Nacional em risco, texto: "Débitos que impedem o ingresso ou levam à exclusão." }
+  - { titulo: Parcelamentos pesados, texto: "Parcelamentos antigos ou rescindidos para reavaliar." }
+  - { titulo: Notificações e autuações, texto: "Intimações e autos de infração com prazo de resposta." }
+  - { titulo: Dívidas em vários órgãos, texto: "Receita, PGFN, estado e município, sem visão de conjunto." }
+frentesTitulo: Quatro frentes, definidas por escrito
+frentesIntro: A empresa pode começar por uma demanda específica, como o diagnóstico ou a regularização de uma pendência, e seguir com a assessoria mensal. O escopo de cada contratação fica no contrato.
+frentes:
+  - { titulo: Diagnóstico jurídico, texto: "Análise das dívidas tributárias federais, estaduais ou municipais, com a situação de cada débito, os riscos e as alternativas, por escrito." }
+  - { titulo: Regularização e negociação, texto: "Parcelamentos, transações tributárias e regularização perante a Receita Federal e a PGFN." }
+  - { titulo: Atuação administrativa e judicial, texto: "Impugnações, recursos, medidas defensivas e ações judiciais, conforme a viabilidade de cada caso." }
+  - { titulo: Assessoria mensal, texto: "Acompanhamento periódico das dívidas e das negociações, no escopo contratado." }
+destaque:
+  id: assessoria
+  sobretitulo: Assessoria mensal
+  titulo: A situação fiscal da sua empresa acompanhada por advogado, todo mês
+  paragrafos:
+    - Depois da regularização, é preciso manter os acordos em dia, responder a novas cobranças e acompanhar novos editais de negociação e mudanças na lei. Com a assessoria mensal, esse acompanhamento é feito pelo mesmo advogado, nos limites definidos em contrato.
+  nota: O escopo é definido em contrato. Impugnações, recursos e ações judiciais são contratados conforme a necessidade de cada caso. A assessoria é jurídica e não substitui a contabilidade.
+  itens:
+    - Acompanhamento das negociações, parcelamentos e transações em andamento
+    - Controle dos prazos dos débitos e acordos acompanhados
+    - Orientação sobre cartas, notificações e intimações recebidas
+    - Aviso sobre novos editais de negociação e mudanças na legislação
+    - Conversa com o contador da empresa, quando necessário
+documentos:
+  - Cartão CNPJ e contrato social atualizado
+  - Relatório de situação fiscal emitido no e-CAC
+  - Extrato da dívida ativa no portal Regularize, da PGFN
+  - Notificações, intimações ou autos de infração recebidos
+  - Parcelamentos e transações ativos ou rescindidos
+  - Contato do contador da empresa
+etapas:
+  - { titulo: Contato inicial, texto: "Você descreve a situação pelo WhatsApp ou por e-mail." }
+  - { titulo: Compreensão da demanda, texto: "Conversa para entender a empresa e definir os documentos e acessos necessários." }
+  - { titulo: Análise jurídica, texto: "Exame dos débitos, com riscos e alternativas explicados por escrito." }
+  - { titulo: Encaminhamentos, texto: "Medidas cabíveis e proposta por escrito, com o escopo do trabalho." }
+  - { titulo: Acompanhamento, texto: "Com a assessoria mensal, acompanhamento periódico no escopo do contrato." }
+mestrado: true
+faqTitulo: Dúvidas sobre débitos tributários
+faq:
+  - pergunta: O que significa ter um débito inscrito em dívida ativa?
+    resposta: Quando um tributo federal não é pago no prazo, o débito pode ser encaminhado à Procuradoria-Geral da Fazenda Nacional (PGFN) e inscrito em dívida ativa da União. A partir daí, a cobrança pode incluir protesto, execução fiscal e dificuldade para obter certidões de regularidade.
+  - pergunta: Qual é a diferença entre parcelamento e transação tributária?
+    resposta: O parcelamento divide o débito em prestações, em regra sem redução de multas e juros; o parcelamento ordinário de débitos federais admite até 60 parcelas. A transação é um acordo previsto na Lei nº 13.988/2020, oferecido pela PGFN ou pela Receita Federal por edital ou proposta individual. Pode incluir descontos em multas, juros e encargos, nunca no valor principal, e prazos maiores, conforme a modalidade e a situação do contribuinte.
+  - pergunta: Toda empresa consegue transação com desconto?
+    resposta: Não. Os descontos dependem da modalidade disponível, da classificação do débito, da capacidade de pagamento da empresa e dos requisitos de cada edital. Só a análise do caso indica quais alternativas são cabíveis.
+  - pergunta: Débitos impedem a empresa de ficar no Simples Nacional?
+    resposta: Débitos com o INSS ou com as Fazendas Públicas cuja exigibilidade não esteja suspensa impedem o ingresso no Simples Nacional e podem levar à exclusão do regime (Lei Complementar nº 123/2006, art. 17, V). Para a empresa que já é optante, a lei permite a permanência no regime se ela comprovar a regularização em até 90 dias contados da ciência da comunicação de exclusão (art. 31, § 2º).
+  - pergunta: Para que serve a assessoria mensal?
+    resposta: Para acompanhar, depois da regularização e dentro do escopo contratado, parcelas e acordos, novas cobranças e notificações e as mudanças de regras que possam abrir outras alternativas. A assessoria não impede fiscalizações nem garante resultados; ela permite agir dentro dos prazos e com informação.
+  - pergunta: O escritório substitui o contador?
+    resposta: Não. A contabilidade continua responsável pela escrituração, pela apuração dos tributos e pelas declarações. A atuação do escritório é jurídica e, quando útil, feita em diálogo com o contador da empresa.
+  - pergunta: O atendimento pode ser todo on-line?
+    resposta: Sim, para empresas de qualquer lugar do Brasil, com conversa por WhatsApp ou vídeo, documentos em PDF e contrato com assinatura eletrônica. Em Brasília, também há atendimento presencial com horário marcado.
+  - pergunta: Como confirmo a inscrição do advogado?
+    resposta: No Cadastro Nacional dos Advogados (cna.oab.org.br), pelo nome João Vitor Figueiredo Lima ou pelo número OAB/DF 77.088.
+chamadaTitulo: Quer entender a situação fiscal da sua empresa?
+chamadaTexto: Envie sua mensagem pelo WhatsApp. O próprio advogado lê e responde.
+avisoRodape: As informações desta página não substituem a análise individual de cada caso. Informações jurídicas conferidas em outubro de 2026.

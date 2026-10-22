@@ -1,0 +1,19 @@
+// Publicação na Cloudflare: um Worker só com arquivos estáticos (a pasta dist/, gerada pelo Astro).
+// É o mesmo Worker "figueiredo-lima" do site atual, com os mesmos domínios.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "figueiredo-lima",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "figueiredolima.adv.br", "custom_domain": true },
+    { "pattern": "www.figueiredolima.adv.br", "custom_domain": true }
+  ],
+  // Endereços de prévia (*.workers.dev) para conferir mudanças antes de irem ao ar.
+  "workers_dev": false,
+  "preview_urls": false
+}

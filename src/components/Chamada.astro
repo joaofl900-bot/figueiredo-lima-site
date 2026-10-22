@@ -1,0 +1,21 @@
+---
+// Chamada final para o WhatsApp, com a foto do advogado em círculo.
+import { Image } from 'astro:assets';
+import avatar from '../assets/fotos/joao-avatar.jpg';
+import BotaoWhatsApp from './BotaoWhatsApp.astro';
+
+interface Props { titulo: string; texto: string; mensagem?: string }
+const { titulo, texto, mensagem } = Astro.props;
+---
+<div class="band">
+  <div class="wrap cta">
+    <div class="cta-who">
+      <Image class="avatar" src={avatar} alt="" width={168} height={168} loading="lazy" />
+      <div>
+        <h2 class="h2" style="font-size: 30px;">{titulo}</h2>
+        <p class="muted" style="margin-top: 6px;">{texto}</p>
+      </div>
+    </div>
+    <BotaoWhatsApp rotulo="Falar com o advogado no WhatsApp" mensagem={mensagem} local="chamada" grande ancora />
+  </div>
+</div>

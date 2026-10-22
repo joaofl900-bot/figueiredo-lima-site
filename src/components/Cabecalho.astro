@@ -1,0 +1,33 @@
+---
+// Cabeçalho fixo com o logotipo original, o menu e o botão de WhatsApp.
+// No celular o menu vira o botão de três linhas, que abre o painel #menu.
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+import BotaoWhatsApp from './BotaoWhatsApp.astro';
+import { menu } from '../data/escritorio';
+
+interface Props { mensagem?: string; temArtigos: boolean }
+const { mensagem, temArtigos } = Astro.props;
+const caminho = Astro.url.pathname;
+const itens = temArtigos ? [...menu.slice(0, 2), { href: '/artigos/', rotulo: 'Artigos', rotuloLongo: 'Artigos' }, ...menu.slice(2)] : menu;
+const atual = (href: string) => (!href.includes('#') && caminho.startsWith(href) ? 'page' : undefined);
+---
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="hdr-logo" href="/" aria-label="Figueiredo Lima Advocacia, página inicial">
+      <Image src={logo} alt="Figueiredo Lima Advocacia" width={340} loading="eager" />
+    </a>
+    <nav class="nav" aria-label="Principal">
+      {itens.map((i) => <a href={i.href} aria-current={atual(i.href)}>{i.rotulo}</a>)}
+      <BotaoWhatsApp rotulo="WhatsApp" mensagem={mensagem} local="cabecalho" />
+    </nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <svg class="ico-bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      <svg class="ico-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
+  </div>
+</header>
+<nav class="menu" id="menu" aria-label="Menu">
+  {itens.map((i) => <a href={i.href} aria-current={atual(i.href)}>{i.rotuloLongo}</a>)}
+  <BotaoWhatsApp rotulo="Falar com o advogado" mensagem={mensagem} local="menu" grande />
+</nav>

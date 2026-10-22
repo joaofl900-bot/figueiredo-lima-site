@@ -1,0 +1,23 @@
+---
+// Linha do tempo do atendimento. "escura" usa a faixa noturna (home); a versão clara é usada nas áreas.
+const padrao = [
+  { titulo: 'Você conta o caso', texto: 'Pelo WhatsApp, com os documentos que tiver em mãos.' },
+  { titulo: 'Análise e orientação', texto: 'Explico os caminhos, os riscos e os prazos, por escrito ou por vídeo.' },
+  { titulo: 'Contrato claro', texto: 'Honorários sempre em contrato escrito, assinado eletronicamente.' },
+  { titulo: 'Acompanhamento', texto: 'Você recebe notícia a cada andamento relevante.' },
+];
+interface Props { itens?: { titulo: string; texto?: string }[]; escura?: boolean; titulo?: string; id?: string }
+const { itens = padrao, escura = false, titulo = 'Um caminho simples e transparente', id = 'como-funciona' } = Astro.props;
+---
+<section class:list={[{ night: escura }]} id={id} aria-labelledby={`t-${id}`}>
+  <div class="wrap sec">
+    <div class="sec-head" data-reveal>
+      <span class="label">Como funciona</span>
+      <h2 class="h2" id={`t-${id}`}>{titulo}</h2>
+      <p>Você sabe o que vai acontecer em cada etapa, antes de qualquer compromisso.</p>
+    </div>
+    <ol class:list={['steps', { 'steps-claro': !escura }]} style={`--cols: ${itens.length}`}>
+      {itens.map((e, i) => <li data-reveal style={`--i:${i}`}><strong>{e.titulo}</strong>{e.texto && <span>{e.texto}</span>}</li>)}
+    </ol>
+  </div>
+</section>

@@ -1,0 +1,52 @@
+---
+// Página Sobre: credenciais verificáveis e autoria dos artigos.
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Chamada from '../components/Chamada.astro';
+import couro from '../assets/fotos/joao-couro.jpg';
+import { escritorio } from '../data/escritorio';
+
+const jsonld = [{
+  '@type': 'ProfilePage',
+  url: `${escritorio.site}/sobre/`,
+  mainEntity: { '@id': `${escritorio.site}/#advogado` },
+}];
+---
+<Base titulo={`${escritorio.advogado}, advogado em Brasília | ${escritorio.oab}`} descricao="Advogado com atuação em direito tributário, cível e público, formado pelo IDP. Atendimento pessoal em Brasília e on-line em todo o Brasil." jsonld={jsonld}>
+  <section class="wrap hero" aria-labelledby="titulo">
+    <div class="hero-text">
+      <span class="label">Sobre o advogado</span>
+      <h1 class="h1" id="titulo">{escritorio.advogado}</h1>
+      <p class="quote">Você fala com o advogado responsável pelo seu caso, do primeiro contato à conclusão.</p>
+    </div>
+    <figure class="frame">
+      <div class="crop" style="aspect-ratio: 4 / 5;">
+        <Picture src={couro} formats={['avif', 'webp']} widths={[480, 640, 960]} sizes="(max-width: 960px) 92vw, 420px" alt={`${escritorio.advogado} sentado em uma poltrona de couro no escritório`} loading="eager" fetchpriority="high" style="object-position: 50% 62%" />
+      </div>
+      <figcaption><b>{escritorio.advogado}</b><span class="muted">{escritorio.oab}</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="sec" style="border-top: 1px solid var(--line);">
+    <div class="wrap texto">
+      <h2>Trajetória</h2>
+      <p>Advogado com atuação em direito tributário, cível e público, formado pelo IDP, com estudos de pós-graduação em Direito Tributário, Direito Constitucional e Direitos Humanos pelo IDP e pela UnB.</p>
+      <p>Aluno especial do mestrado em Direito da UnB, em Direito Tributário, com uma disciplina já concluída.</p>
+      <p>Experiência profissional em consultoria de empresas e escritórios de advocacia.</p>
+      <h2>Como trabalho</h2>
+      <ul class="lista lista-lg">
+        <li>Atendimento pessoal, sem intermediários</li>
+        <li>Riscos, prazos e honorários explicados por escrito antes de qualquer assinatura</li>
+        <li>Notícia a cada andamento relevante do caso</li>
+      </ul>
+      <ul class="fatos" style="margin-top: var(--space-5);">
+        <li><span class="label">Inscrição</span><span><b>{escritorio.oab}</b> · <a class="link" href={escritorio.cna} target="_blank" rel="noopener">confirmar no CNA</a></span></li>
+        <li><span class="label">Escritório</span><span>{escritorio.bairro}, {escritorio.cidade}/{escritorio.uf}</span></li>
+        <li><span class="label">Atendimento</span><span>Presencial com horário marcado e on-line em todo o Brasil</span></li>
+        <li><span class="label">Sociedade</span><span>{escritorio.marca} é a marca de {escritorio.razaoSocial}, CNPJ {escritorio.cnpj}</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <Chamada titulo="Quer conversar sobre o seu caso?" texto="Envie sua mensagem pelo WhatsApp. Eu mesmo leio e respondo." />
+</Base>
