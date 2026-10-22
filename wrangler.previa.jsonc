@@ -1,0 +1,13 @@
+// Prévia do site novo num endereço de teste (*.workers.dev), separada do site oficial.
+// Publicar: npx astro build, copiar dist para dist-previa (com noindex) e rodar
+// npx wrangler deploy --config wrangler.previa.jsonc
+{
+  "name": "figueiredo-lima-previa",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist-previa",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": true
+}
