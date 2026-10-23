@@ -5,3 +5,6 @@ dist/
 .env
 .env.*
 dist-previa/
+
+# Cache do Python (scripts/)
+__pycache__/
