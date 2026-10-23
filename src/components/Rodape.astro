@@ -2,7 +2,7 @@
 // Rodapé com os dados de identificação exigidos na publicidade da advocacia (Provimento 205/2021).
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo-dourado-claro.png';
 import { escritorio } from '../data/escritorio';
 
 const areas = (await getCollection('areas')).sort((a, b) => a.data.ordem - b.data.ordem);
