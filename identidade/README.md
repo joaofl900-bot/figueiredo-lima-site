@@ -26,11 +26,13 @@ O desenho do logotipo é único e **não pode ser alterado, recortado nem virar 
 |---|---|
 | `logotipo-quadrado-bege.png`, `logotipo-horizontal-bege.png` | Padrão: perfis, assinaturas de e-mail e documentos (fundo bege já aplicado) |
 | `logotipo-quadrado-dourado-bege.png`, `logotipo-horizontal-dourado-bege.png` | Sobre fundo bege ou branco (PNG transparente, dourado `#7A5D10`) |
+| `logotipo-horizontal-dourado-bege.svg`, `logotipo-horizontal-dourado-claro.svg` | Versão vetorial: nítida em qualquer tamanho. Usar em gráfica, papelaria e documentos |
+| `logotipo-horizontal-dourado-bege-alta.png` | PNG de 2.000 px gerado do vetor; é o que vai nas peças |
 | `logotipo-quadrado-preto.png`, `logotipo-horizontal-preto.png` | Só quando o fundo precisar ser escuro |
 | `logotipo-quadrado-dourado-claro.png`, `logotipo-horizontal-dourado-claro.png` | Sobre qualquer fundo escuro (PNG transparente, dourado `#C9A54A`) |
 | `logotipo-quadrado-transparente.png`, `logotipo-horizontal-transparente.png` | Dourado original do arquivo de origem, só para referência |
 
-Para gerar de novo: `node scripts/gerar-logotipos.mjs` (grava também o logotipo do site em `src/assets/logo-dourado-bege.png`).
+Para gerar de novo: `node scripts/vetorizar-logotipo.mjs` (cria os SVG a partir do logotipo oficial, sem mudar o desenho) e depois `node scripts/gerar-logotipos.mjs` (grava as demais versões, as faixas e o logotipo do site em `src/assets/logo-dourado-bege.png`).
 
 ## 3. Modelo de peça: `modelo-peticao-figueiredo-lima.docx`
 
@@ -38,11 +40,13 @@ Toda peça nova parte deste arquivo. Ele já traz o cabeçalho e o rodapé; só 
 
 **Página:** A4, fundo branco. Margens: superior 3 cm, esquerda 3 cm, direita 2 cm, inferior 2,4 cm (o texto não encosta na faixa do rodapé). Distância do cabeçalho 1 cm; distância do rodapé 0 (é o que deixa a faixa colada na borda e o texto no meio dela).
 
-**Cabeçalho:** faixa bege `#F3EEE6` de ponta a ponta da folha (2,5 cm), com o logotipo em dourado `#7A5D10` no centro e fio dourado embaixo (`faixa-cabecalho.png`, atrás do texto).
+**Cabeçalho:** faixa bege `#F3EEE6` de ponta a ponta da folha (2,5 cm), com fio dourado embaixo (`faixa-cabecalho.png`, atrás do texto), e o logotipo em dourado `#7A5D10` no centro, como imagem própria de 5,05 x 0,86 cm a 0,81 cm do topo.
+
+**Qualidade do logotipo:** o logotipo não fica dentro da faixa. O Google Docs reduz imagens largas para cerca de 2.000 pixels, e dentro da faixa de 21 cm ele ficava pixelado no zoom. Como imagem própria, entra com 2.000 px em 5 cm, cerca de 1.000 dpi, sem perda. No Word, a peça usa também o SVG vetorial, e o PDF sai com o logotipo em vetor. Conferido em 23/10/2026: o PDF do Google Docs manteve os 2.000 px.
 
 **Rodapé:** faixa toda bege, sem fio, de ponta a ponta e colada na borda de baixo (2,1 cm, `faixa-rodape.png`), com três linhas em Garamond 8, dourado `#7A5D10`, centralizadas na horizontal e na vertical: endereço completo, telefone e e-mail, nome e OAB. Entrelinha simples; a última linha tem 17,5 pt de espaço depois, o que põe o bloco no meio da faixa.
 
-As duas faixas ficam presas ao **cabeçalho**, com posição medida a partir da página. Assim o Word e o Google Docs mostram o rodapé igual (o Google Docs desloca imagens presas ao rodapé e deixava uma tira branca embaixo). Testado com exportação em PDF pelo Google Docs em 23/10/2026.
+As duas faixas e o logotipo ficam presos ao **cabeçalho**, com posição medida a partir da página. Assim o Word e o Google Docs mostram o rodapé igual (o Google Docs desloca imagens presas ao rodapé e deixava uma tira branca embaixo). Testado com exportação em PDF pelo Google Docs em 23/10/2026.
 
 **Corpo (Arial):**
 

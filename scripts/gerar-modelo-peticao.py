@@ -13,32 +13,41 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 FAIXA_CAB = RAIZ / 'identidade' / 'faixa-cabecalho.png'
 FAIXA_ROD = RAIZ / 'identidade' / 'faixa-rodape.png'
+LOGO_PNG = RAIZ / 'identidade' / 'logotipo-horizontal-dourado-bege-alta.png'
+LOGO_SVG = RAIZ / 'identidade' / 'logotipo-horizontal-dourado-bege.svg'
 
 # Medidas em EMU (1 cm = 360000). Folha A4: 21 x 29,7 cm.
 LARGURA = 7560000
 ALTO_CAB = 900000      # 2,5 cm
 ALTO_ROD = 756000      # 2,1 cm
 ALTO_FOLHA = 10692130  # 16838 twips
+# Logotipo no cabeçalho: 5,05 x 0,86 cm, centrado na folha, na mesma altura de antes (0,81 cm do topo).
+LOGO_LARGO = 1818360
+LOGO_ALTO = 308881
+LOGO_TOPO = 292680
 OURO = '7A5D10'        # dourado sobre o bege, igual ao do site (logotipo e texto)
 
 NS_A = 'http://schemas.openxmlformats.org/drawingml/2006/main'
 NS_PIC = 'http://schemas.openxmlformats.org/drawingml/2006/picture'
 
 
-def faixa(rid, nome, id_, y, alto):
-    """Imagem ancorada na página, atrás do texto, de ponta a ponta."""
+def imagem(rid, nome, id_, x, y, largo, alto, rid_svg=None):
+    """Imagem ancorada na página, atrás do texto. Com rid_svg, o Word usa o vetor e os outros, o PNG."""
+    svg = (f'<a:extLst><a:ext uri="{{96DAC541-7B7A-43D3-8B79-37D633B846F1}}"><asvg:svgBlip '
+           f'xmlns:asvg="http://schemas.microsoft.com/office/drawing/2016/SVG/main" r:embed="{rid_svg}"/></a:ext></a:extLst>'
+           if rid_svg else '')
     return (
         f'<w:r><w:drawing><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="0" '
         f'behindDoc="1" locked="1" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/>'
-        f'<wp:positionH relativeFrom="page"><wp:posOffset>0</wp:posOffset></wp:positionH>'
+        f'<wp:positionH relativeFrom="page"><wp:posOffset>{x}</wp:posOffset></wp:positionH>'
         f'<wp:positionV relativeFrom="page"><wp:posOffset>{y}</wp:posOffset></wp:positionV>'
-        f'<wp:extent cx="{LARGURA}" cy="{alto}"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/>'
+        f'<wp:extent cx="{largo}" cy="{alto}"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/>'
         f'<wp:docPr id="{id_}" name="{nome}" descr="Figueiredo Lima Advocacia"/>'
         f'<wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="{NS_A}" noChangeAspect="1"/></wp:cNvGraphicFramePr>'
         f'<a:graphic xmlns:a="{NS_A}"><a:graphicData uri="{NS_PIC}"><pic:pic xmlns:pic="{NS_PIC}">'
         f'<pic:nvPicPr><pic:cNvPr id="{id_}" name="{nome}.png"/><pic:cNvPicPr/></pic:nvPicPr>'
-        f'<pic:blipFill><a:blip r:embed="{rid}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
-        f'<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="{LARGURA}" cy="{alto}"/></a:xfrm>'
+        f'<pic:blipFill><a:blip r:embed="{rid}">{svg}</a:blip><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
+        f'<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="{largo}" cy="{alto}"/></a:xfrm>'
         f'<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic>'
         f'</wp:anchor></w:drawing></w:r>'
     )
@@ -55,13 +64,14 @@ def linha_rodape(texto, depois=0):
     )
 
 
-# As duas faixas ficam presas ao cabeçalho, medidas a partir da página: o Google Docs respeita essa posição
-# no cabeçalho, mas desloca imagens presas ao rodapé.
+# As faixas e o logotipo ficam presos ao cabeçalho, medidos a partir da página: o Google Docs respeita essa
+# posição no cabeçalho, mas desloca imagens presas ao rodapé.
 def novo_cabecalho(raiz_original):
     return (
         f'{raiz_original}<w:p><w:pPr><w:spacing w:after="0"/></w:pPr>'
-        f'{faixa("rIdFaixaCab", "Faixa do cabeçalho", 1001, 0, ALTO_CAB)}'
-        f'{faixa("rIdFaixaRod", "Faixa do rodapé", 1002, ALTO_FOLHA - ALTO_ROD, ALTO_ROD)}</w:p></w:hdr>'
+        f'{imagem("rIdFaixaCab", "Faixa do cabeçalho", 1001, 0, 0, LARGURA, ALTO_CAB)}'
+        f'{imagem("rIdLogo", "Logotipo", 1003, (LARGURA - LOGO_LARGO) // 2, LOGO_TOPO, LOGO_LARGO, LOGO_ALTO, "rIdLogoSvg")}'
+        f'{imagem("rIdFaixaRod", "Faixa do rodapé", 1002, 0, ALTO_FOLHA - ALTO_ROD, LARGURA, ALTO_ROD)}</w:p></w:hdr>'
     )
 
 
@@ -192,10 +202,19 @@ def gerar(origem, destino, modelo=False):
     partes['word/header1.xml'] = novo_cabecalho(raiz_cab).encode('utf8')
     partes['word/footer1.xml'] = novo_rodape(raiz_rod, linhas).encode('utf8')
     partes['word/_rels/header1.xml.rels'] = RELS.format(
-        IMG.format(rid='rIdFaixaCab', alvo='faixa-cabecalho.png') + IMG.format(rid='rIdFaixaRod', alvo='faixa-rodape.png')).encode('utf8')
+        IMG.format(rid='rIdFaixaCab', alvo='faixa-cabecalho.png') + IMG.format(rid='rIdFaixaRod', alvo='faixa-rodape.png')
+        + IMG.format(rid='rIdLogo', alvo='logotipo.png') + IMG.format(rid='rIdLogoSvg', alvo='logotipo.svg')).encode('utf8')
     partes['word/_rels/footer1.xml.rels'] = RELS.format('').encode('utf8')
     partes['word/media/faixa-cabecalho.png'] = FAIXA_CAB.read_bytes()
     partes['word/media/faixa-rodape.png'] = FAIXA_ROD.read_bytes()
+    partes['word/media/logotipo.png'] = LOGO_PNG.read_bytes()
+    partes['word/media/logotipo.svg'] = LOGO_SVG.read_bytes()
+    tipos = partes['[Content_Types].xml'].decode('utf8')
+    if 'Extension="svg"' not in tipos:
+        tipos = tipos.replace('<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">',
+                              '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+                              '<Default ContentType="image/svg+xml" Extension="svg"/>')
+        partes['[Content_Types].xml'] = tipos.encode('utf8')
 
     doc = partes['word/document.xml'].decode('utf8')
     for velha, nova in CORES.items():

@@ -2,7 +2,8 @@
 // O desenho do logotipo não muda, só o tom do dourado conforme o fundo:
 // sobre o bege do site (#F3EEE6), o dourado de texto do site (#7A5D10), mais firme que o original;
 // sobre o preto do site (#1B1814), o dourado claro (#C9A54A).
-// Uso: node scripts/gerar-logotipos.mjs   (grava em identidade/ e o logotipo do site em src/assets/)
+// Uso: node scripts/vetorizar-logotipo.mjs && node scripts/gerar-logotipos.mjs
+//      (grava em identidade/ e o logotipo do site em src/assets/)
 import sharp from 'sharp';
 import { mkdirSync } from 'node:fs';
 
@@ -72,23 +73,21 @@ const horizontal = await versoes('logotipo-horizontal', hData, hInfo.width, hInf
   { x: Math.round(hInfo.width * 0.12), y: Math.round(hInfo.height * 0.6) });
 await sharp(horizontal, { raw: { width: hInfo.width, height: hInfo.height, channels: 4 } }).png().toFile('src/assets/logo-dourado-bege.png');
 
-// Faixas bege das peças (folha A4 de ponta a ponta, 300 dpi): cabeçalho com o logotipo no centro e
-// fio dourado embaixo; rodapé todo bege, sem fio (o texto do rodapé fica editável no Word).
+// Faixas bege das peças (folha A4 de ponta a ponta, 300 dpi): cabeçalho só com o fio dourado embaixo e
+// rodapé todo bege, sem fio. O logotipo entra no Word como imagem própria, em alta resolução, gerada do SVG
+// vetorizado (scripts/vetorizar-logotipo.mjs): dentro da faixa larga ele perdia qualidade, porque o
+// Google Docs reduz imagens largas para cerca de 2.000 pixels.
 const cm = (v) => Math.round((v / 2.54) * 300);
 const fio = 4;
 const larguraA4 = cm(21);
-const altoCab = cm(2.5);
-const logoAlto = cm(0.95);
-const logoCab = await sharp(horizontal, { raw: { width: hInfo.width, height: hInfo.height, channels: 4 } })
-  .resize({ height: logoAlto }).png().toBuffer();
-const { width: logoLargo } = await sharp(logoCab).metadata();
 const fioOuro = await sharp({ create: { width: larguraA4, height: fio, channels: 3, background: ouroBege } }).png().toBuffer();
-await sharp({ create: { width: larguraA4, height: altoCab, channels: 3, background: bege } })
-  .composite([
-    { input: logoCab, left: Math.round((larguraA4 - logoLargo) / 2), top: Math.round((altoCab - fio - logoAlto) / 2) },
-    { input: fioOuro, left: 0, top: altoCab - fio },
-  ])
-  .png({ palette: true, colours: 64 }).toFile(`${saida}/faixa-cabecalho.png`);
+await sharp({ create: { width: larguraA4, height: cm(2.5), channels: 3, background: bege } })
+  .composite([{ input: fioOuro, left: 0, top: cm(2.5) - fio }])
+  .png({ palette: true, colours: 2 }).toFile(`${saida}/faixa-cabecalho.png`);
 await sharp({ create: { width: larguraA4, height: cm(2.1), channels: 3, background: bege } })
   .png({ palette: true, colours: 2 }).toFile(`${saida}/faixa-rodape.png`);
+// 2.000 px de largura para 5 cm na folha: cerca de 1.000 dpi, abaixo do limite do Google Docs.
+const svg = `${saida}/logotipo-horizontal-dourado-bege.svg`;
+const { width: svgLargo } = await sharp(svg).metadata();
+await sharp(svg, { density: (72 * 2000) / svgLargo }).png().toFile(`${saida}/logotipo-horizontal-dourado-bege-alta.png`);
 console.log('ok');
