@@ -2,6 +2,7 @@
 // Página Sobre: credenciais verificáveis e autoria dos artigos.
 import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import BotaoWhatsApp from '../components/BotaoWhatsApp.astro';
 import Chamada from '../components/Chamada.astro';
 import couro from '../assets/fotos/joao-couro.jpg';
 import { escritorio } from '../data/escritorio';
@@ -13,21 +14,29 @@ const jsonld = [{
 }];
 ---
 <Base titulo={`${escritorio.advogado}, advogado | ${escritorio.oab}`} descricao="Advogado com atuação em direito tributário, cível e público, formado pelo IDP. Atendimento pessoal em Brasília e on-line em todo o Brasil." jsonld={jsonld}>
-  <section class="wrap hero" aria-labelledby="titulo">
-    <div class="hero-text">
-      <span class="label">Sobre o advogado</span>
-      <h1 class="h1" id="titulo">{escritorio.advogado}</h1>
-      <p class="quote">Você fala com o advogado responsável pelo seu caso, do primeiro contato à conclusão.</p>
-    </div>
-    <figure class="frame">
-      <div class="crop" style="aspect-ratio: 4 / 5;">
-        <Picture src={couro} formats={['avif', 'webp']} widths={[480, 640, 960]} sizes="(max-width: 960px) 92vw, 420px" alt={`${escritorio.advogado} sentado em uma poltrona de couro no escritório`} loading="eager" fetchpriority="high" style="object-position: 50% 62%" />
+  <section class="noite" aria-labelledby="titulo">
+    <div class="wrap topo">
+      <div class="topo-grade">
+        <div class="topo-texto">
+          <p class="kicker">Advogado responsável, {escritorio.oab}</p>
+          <h1 class="h1" id="titulo">{escritorio.advogado}</h1>
+          <span class="traco" aria-hidden="true"></span>
+          <p class="lead">Você fala com o advogado responsável pelo seu caso, do primeiro contato à conclusão. Eu mesmo leio e respondo cada mensagem.</p>
+          <div class="acoes">
+            <BotaoWhatsApp rotulo="Falar com o advogado no WhatsApp" local="sobre" grande ancora />
+          </div>
+        </div>
+        <figure class="moldura">
+          <div class="crop">
+            <Picture src={couro} formats={['avif', 'webp']} widths={[480, 640, 960]} sizes="(max-width: 960px) 92vw, 420px" alt={`${escritorio.advogado} sentado em uma poltrona de couro no escritório`} loading="eager" fetchpriority="high" style="object-position: 50% 62%" />
+          </div>
+          <figcaption><b>{escritorio.advogado}</b><span>{escritorio.oab}</span></figcaption>
+        </figure>
       </div>
-      <figcaption><b>{escritorio.advogado}</b><span class="muted">{escritorio.oab}</span></figcaption>
-    </figure>
+    </div>
   </section>
 
-  <section class="sec" style="border-top: 1px solid var(--line);">
+  <section class="sec">
     <div class="wrap texto">
       <h2>Trajetória</h2>
       <p>Advogado com atuação em direito tributário, cível e público, formado pelo IDP, com estudos de pós-graduação em Direito Tributário, Direito Constitucional e Direitos Humanos pelo IDP e pela UnB.</p>
@@ -39,10 +48,10 @@ const jsonld = [{
         <li>Notícia a cada andamento relevante do caso</li>
       </ul>
       <ul class="fatos" style="margin-top: var(--space-5);">
-        <li><span class="label">Inscrição</span><span><b>{escritorio.oab}</b> · <a class="link" href={escritorio.cna} target="_blank" rel="noopener">confirmar no CNA</a></span></li>
-        <li><span class="label">Escritório</span><span>{escritorio.bairro}, {escritorio.cidade}/{escritorio.uf}</span></li>
-        <li><span class="label">Atendimento</span><span>Presencial com horário marcado e on-line em todo o Brasil</span></li>
-        <li><span class="label">Sociedade</span><span>{escritorio.marca} é a marca de {escritorio.razaoSocial}, CNPJ {escritorio.cnpj}</span></li>
+        <li><span>Inscrição</span><span><b>{escritorio.oab}</b>, <a class="link" href={escritorio.cna} target="_blank" rel="noopener">confirmar no CNA</a></span></li>
+        <li><span>Escritório</span><span>{escritorio.bairro}, {escritorio.cidade}/{escritorio.uf}</span></li>
+        <li><span>Atendimento</span><span>Presencial com horário marcado e on-line em todo o Brasil</span></li>
+        <li><span>Sociedade</span><span>{escritorio.marca} é a marca de {escritorio.razaoSocial}, CNPJ {escritorio.cnpj}</span></li>
       </ul>
     </div>
   </section>

@@ -3,12 +3,21 @@ nome: Leilões de imóveis
 resumoCard: Análise do edital, das dívidas e da ocupação, do lance até o registro do imóvel.
 seoTitulo: Advogado para compra de imóvel em leilão | Figueiredo Lima
 seoDescricao: Análise do edital, das dívidas e da ocupação antes do lance, compra sem lance por proposta no processo, registro e imissão na posse. Atendimento em todo o Brasil.
-sobretitulo: Leilões de imóveis · atendimento em todo o Brasil
-h1: Advogado para compra de imóvel em leilão
+sobretitulo: Leilões de imóveis, com atendimento em todo o Brasil
+h1: Encontrou um imóvel em leilão e não sabe se vale dar o lance?
 abertura: Comprar em leilão judicial pode ser uma boa oportunidade, desde que você conheça os riscos antes do lance. Analiso o processo, o edital e o imóvel e acompanho tudo até o registro em seu nome.
 botao: Falar sobre um leilão
 mensagemWhatsApp: Olá! Vim pelo site e quero orientação sobre a compra de um imóvel em leilão.
 foto: close
+historiaTitulo: Antes do lance, entenda os riscos
+historia:
+  - { titulo: "O preço baixo pode esconder custos", texto: "Dívidas de condomínio e IPTU, a ocupação do imóvel e os custos de registro mudam a conta. Quem paga cada dívida depende do edital e do tipo de débito." }
+  - { titulo: "O processo e a matrícula dizem o que o anúncio não diz", texto: "Penhoras, ônus, recursos pendentes e as condições de pagamento estão no processo e na matrícula, e precisam ser lidos antes do lance." }
+  - { titulo: "Leilão sem lance ainda pode virar compra", texto: "Sem lance e sem adjudicação, o juiz pode autorizar a venda por iniciativa particular, com preço mínimo e condições definidas (CPC, art. 880)." }
+  - { titulo: "Acompanhamento até o imóvel ser seu", texto: "Analiso o processo, o edital e a matrícula, acompanho a arrematação e cuido do registro e da imissão na posse." }
+fecho:
+  frase: Um bom negócio em leilão começa antes do lance.
+  texto: Com a análise prévia, você sabe o que está comprando, quanto vai custar no total e quanto tempo pode levar até a posse.
 situacoes:
   - { titulo: Avaliar um imóvel antes de dar lance }
   - { titulo: Dívidas de condomínio e IPTU }

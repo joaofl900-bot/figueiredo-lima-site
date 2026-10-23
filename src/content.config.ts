@@ -24,9 +24,15 @@ const areas = defineCollection({
     botao: z.string(),
     mensagemWhatsApp: z.string(),
     linkSecundario: z.object({ rotulo: z.string(), href: z.string() }).optional(),
-    apoio: z.string().default('Mensagem respondida pelo próprio advogado.'),
+    // Frase que acompanha "Eu mesmo leio e respondo cada mensagem." no topo da página.
+    apoio: z.string().default('Escritório no Lago Norte, em Brasília, com atendimento presencial com horário marcado.'),
     foto: z.enum(['principal', 'close', 'couro']).default('close'),
     avisoSimples: z.boolean().default(false),
+    // A apresentação a partir da dor do cliente: quatro quadros (o problema, o risco, a saída e como atuo)
+    // e o fechamento, com a frase-síntese e o que o serviço inclui (se faltar, usa as frentes).
+    historiaTitulo: z.string(),
+    historia: z.array(item).length(4),
+    fecho: z.object({ frase: z.string(), texto: z.string().optional(), itens: z.array(z.string()).optional() }),
     situacoesIntro: z.string().optional(),
     situacoes: z.array(item),
     frentesTitulo: z.string().default('Como atuo'),

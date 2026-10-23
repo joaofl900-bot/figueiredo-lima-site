@@ -49,19 +49,6 @@
     window.matchMedia('(min-width: 961px)').addEventListener('change', function (m) { if (m.matches) abrir(false); });
   }
 
-  /* Surgimento suave das seções ao entrarem na tela; sem observer, tudo aparece de imediato */
-  var revelaveis = document.querySelectorAll('[data-reveal]');
-  if (temObserver) {
-    var obsReveal = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('is-in'); obsReveal.unobserve(en.target); }
-      });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    revelaveis.forEach(function (el) { obsReveal.observe(el); });
-  } else {
-    revelaveis.forEach(function (el) { el.classList.add('is-in'); });
-  }
-
   /* WhatsApp flutuante: aparece só quando nenhum outro botão verde está visível,
      para nunca haver dois na mesma tela. Os botões de referência têm data-wa-ancora. */
   var flutuante = document.querySelector('.wa-float');

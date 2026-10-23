@@ -7,29 +7,31 @@ import { escritorio } from '../data/escritorio';
 const jsonld = [{ '@type': 'ContactPage', url: `${escritorio.site}/contato/`, about: { '@id': `${escritorio.site}/#escritorio` } }];
 ---
 <Base titulo="Contato | Figueiredo Lima Advocacia, Brasília" descricao={`WhatsApp ${escritorio.telefone}, e-mail e atendimento presencial com horário marcado no Lago Norte, Brasília/DF. On-line em todo o Brasil.`} jsonld={jsonld}>
-  <section class="sec" aria-labelledby="titulo">
+  <section class="noite" aria-labelledby="titulo">
+    <div class="wrap topo-simples">
+      <h1 class="h1" id="titulo">Fale com o escritório</h1>
+      <p class="lead">Conte o seu caso pelo canal que preferir. Eu mesmo leio e respondo cada mensagem.</p>
+    </div>
+  </section>
+
+  <section class="sec">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="label">Contato</span>
-        <h1 class="h1" id="titulo">Fale com o escritório</h1>
-        <p>Mensagens respondidas pelo próprio advogado.</p>
-      </div>
       <div class="canais">
         <div class="canal">
-          <span class="label">WhatsApp e telefone</span>
+          <h2>WhatsApp e telefone</h2>
           <span class="v" id="v-tel">{escritorio.telefone}</span>
           <span class="muted small">Mensagens respondidas pelo próprio advogado</span>
           <BotaoWhatsApp rotulo="Abrir o WhatsApp" local="contato" ancora />
           <button class="copiar" type="button" data-copiar="v-tel">Copiar número</button>
         </div>
         <div class="canal">
-          <span class="label">E-mail</span>
+          <h2>E-mail</h2>
           <span class="v" id="v-mail">{escritorio.email}</span>
           <span class="muted small">Para envio de documentos</span>
           <button class="copiar" type="button" data-copiar="v-mail">Copiar e-mail</button>
         </div>
         <div class="canal">
-          <span class="label">Escritório</span>
+          <h2>Escritório</h2>
           <span class="v">{escritorio.bairro}, {escritorio.cidade}/{escritorio.uf}</span>
           <a class="link" href={escritorio.mapa} target="_blank" rel="noopener">Ver no Google Maps</a>
           <span class="muted small">Atendimento presencial com horário marcado; o endereço completo é enviado no agendamento.</span>

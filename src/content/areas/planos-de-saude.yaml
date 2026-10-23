@@ -3,12 +3,21 @@ nome: Planos de saúde
 resumoCard: Para quem teve um tratamento negado ou um reajuste que merece revisão.
 seoTitulo: Advogado de planos de saúde em Brasília | Figueiredo Lima
 seoDescricao: Tratamento, exame ou cirurgia negados pelo plano? Reajuste alto? Entenda seus direitos e fale direto com o advogado. Brasília e on-line em todo o Brasil.
-sobretitulo: Planos de saúde · Brasília e todo o Brasil
-h1: Advogado de planos de saúde em Brasília
-abertura: Se o plano negou um tratamento ou aumentou muito a mensalidade, você não precisa enfrentar isso sozinho. Explico o que a lei e o seu contrato dizem e quais caminhos existem, inclusive quando há urgência.
+sobretitulo: Planos de saúde, em Brasília e on-line em todo o Brasil
+h1: O plano de saúde negou o seu tratamento ou aumentou demais a mensalidade?
+abertura: Uma negativa ou um reajuste alto chegam quase sempre num momento difícil. Você não precisa enfrentar isso sozinho. Explico o que a lei e o seu contrato dizem e quais caminhos existem, inclusive quando há urgência.
 botao: Falar sobre o meu plano
 mensagemWhatsApp: Olá! Vim pelo site e preciso de orientação sobre o meu plano de saúde.
 foto: principal
+historiaTitulo: Antes de aceitar a negativa, entenda o cenário
+historia:
+  - { titulo: "A negativa nem sempre é a palavra final", texto: "Muitas recusas se apoiam em cláusulas ou interpretações que podem ser questionadas diante da lei, das regras da ANS e do pedido médico." }
+  - { titulo: "Quando há urgência, o tempo conta", texto: "Com o relatório médico, é possível pedir à Justiça uma decisão provisória logo no início do processo. A decisão depende da análise do juiz em cada caso." }
+  - { titulo: "Reajuste alto também pode ser revisto", texto: "Reajustes por faixa etária ou anuais precisam seguir o contrato e as regras da ANS. Percentuais desarrazoados podem ser questionados." }
+  - { titulo: "Um caminho definido para o seu caso", texto: "Analiso a negativa, o contrato e o relatório médico, faço o pedido ao plano e à ANS e, se necessário, levo o caso à Justiça." }
+fecho:
+  frase: Você não precisa enfrentar sozinho a negativa do plano.
+  texto: Com os documentos certos e um pedido bem fundamentado, o caso segue para o plano, para a ANS ou para a Justiça, conforme a urgência.
 situacoes:
   - { titulo: "Tratamento, exame ou cirurgia negados" }
   - { titulo: Medicamento ou terapia recusados }

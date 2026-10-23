@@ -1,19 +1,22 @@
 ---
-// Página inicial (direção A, aprovada em 22/10/2026).
+// Página inicial (Versão 2, aprovada em 23/10/2026): topo preto com o título humanizado,
+// o tributário apresentado a partir da dor do empresário e as demais áreas em lista.
 import { Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import BotaoWhatsApp from '../components/BotaoWhatsApp.astro';
+import Historia from '../components/Historia.astro';
 import Etapas from '../components/Etapas.astro';
 import Advogado from '../components/Advogado.astro';
 import Faq from '../components/Faq.astro';
 import Chamada from '../components/Chamada.astro';
 import principal from '../assets/fotos/joao-principal.jpg';
+import punho from '../assets/fotos/joao-punho.jpg';
 import congresso from '../assets/fotos/congresso.jpg';
 import { escritorio } from '../data/escritorio';
 
 const areas = (await getCollection('areas')).sort((a, b) => a.data.ordem - b.data.ordem);
-const destaque = areas.find((a) => a.data.principal)!;
+const trib = areas.find((a) => a.data.principal)!;
 const outras = areas.filter((a) => !a.data.principal);
 const artigos = (await getCollection('artigos', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -33,91 +36,89 @@ const faqJsonLd = { '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': '
   descricao="João Vitor Figueiredo Lima, OAB/DF 77.088. Regularização fiscal e assessoria jurídica para empresas, planos de saúde, consumidor, leilões de imóveis, cível e direito público. Brasília e on-line em todo o Brasil."
   jsonld={[faqJsonLd]}
 >
-  <section class="wrap hero" aria-labelledby="titulo">
-    <div class="hero-text">
-      <span class="label">Brasília · atendimento on-line em todo o Brasil</span>
-      <h1 class="display" id="titulo">Regularização fiscal e assessoria jurídica para empresas</h1>
-      <p class="lead">Débitos tributários, parcelamentos e transação com a PGFN, com acompanhamento mensal e atendimento direto com o advogado. Também atuo em planos de saúde, direito do consumidor, leilões de imóveis, cível e direito público.</p>
-      <div class="hero-actions">
-        <BotaoWhatsApp rotulo="Falar com o advogado no WhatsApp" local="abertura" grande ancora />
-        <a class="link" href="#areas">Ver áreas de atuação</a>
+  <section class="noite" aria-labelledby="titulo">
+    <div class="wrap topo">
+      <div class="topo-grade">
+        <div class="topo-texto">
+          <h1 class="display" id="titulo">Advocacia humanizada, focada em buscar solução técnica e ágil para o seu caso</h1>
+          <span class="traco" aria-hidden="true"></span>
+          <p class="lead">Advogado em Brasília, com atuação em direito tributário para empresas, planos de saúde, direito do consumidor, leilões de imóveis, cível e direito público. Atendimento on-line em todo o Brasil.</p>
+          <div class="acoes">
+            <BotaoWhatsApp rotulo="Falar com o advogado no WhatsApp" local="abertura" grande ancora />
+            <a class="link-noite" href="#areas">Ver áreas de atuação</a>
+          </div>
+          <p class="assina"><b>Eu mesmo leio e respondo cada mensagem.</b> Escritório no Lago Norte, com atendimento presencial com horário marcado.</p>
+        </div>
+        <figure class="moldura">
+          <div class="crop">
+            <Picture src={principal} formats={['avif', 'webp']} widths={[480, 640, 960]} sizes="(max-width: 960px) 92vw, 420px" alt={`${escritorio.advogado}, advogado, sorrindo, sentado em uma poltrona no escritório`} loading="eager" fetchpriority="high" style="object-position: 50% 26%" />
+          </div>
+          <figcaption><b>{escritorio.advogado}</b><span>{escritorio.oab}</span></figcaption>
+        </figure>
       </div>
-      <p class="micro">Mensagem respondida pelo próprio advogado.</p>
     </div>
-    <figure class="frame">
-      <div class="crop crop-principal">
-        <Picture src={principal} formats={['avif', 'webp']} widths={[480, 640, 960]} sizes="(max-width: 960px) 92vw, 600px" alt={`${escritorio.advogado}, advogado, sorrindo, sentado em uma poltrona no escritório`} loading="eager" fetchpriority="high" />
-      </div>
-      <figcaption><b>{escritorio.advogado}</b><span class="muted">{escritorio.oab}</span></figcaption>
-    </figure>
+    <div class="wrap valores">
+      <div><strong>Atendimento direto</strong><span>Você fala com o advogado responsável pelo seu caso, do início ao fim.</span></div>
+      <div><strong>Todo o Brasil</strong><span>Processos eletrônicos, reunião por vídeo e contratos assinados eletronicamente.</span></div>
+      <div><strong>Clareza</strong><span>Riscos, prazos e honorários explicados por escrito antes de qualquer assinatura.</span></div>
+    </div>
   </section>
 
-  <div class="band">
-    <div class="wrap valores">
-      <div data-reveal style="--i:0"><strong>Atendimento direto</strong><span>Você fala com o advogado responsável pelo seu caso, do início ao fim.</span></div>
-      <div data-reveal style="--i:1"><strong>Todo o Brasil</strong><span>Processos eletrônicos, reunião por vídeo e contratos assinados eletronicamente.</span></div>
-      <div data-reveal style="--i:2"><strong>Clareza</strong><span>Riscos, prazos e honorários explicados por escrito antes de qualquer assinatura.</span></div>
-    </div>
-  </div>
+  <Historia
+    id="tributario"
+    kicker={trib.data.nome}
+    titulo={trib.data.h1}
+    quadros={trib.data.historia}
+    frase={trib.data.fecho.frase}
+    texto={trib.data.fecho.texto}
+    itens={trib.data.fecho.itens ?? trib.data.frentes.map((f) => f.titulo)}
+    botao="Falar sobre a minha empresa"
+    mensagem={trib.data.mensagemWhatsApp}
+    link={{ rotulo: 'Conhecer a assessoria mensal', href: `/${trib.id}/` }}
+    foto={punho}
+    fotoAlt={`${escritorio.advogado} à mesa do escritório, ajustando o punho da camisa`}
+    local="home-tributario"
+  />
 
-  <section class="sec" id="areas" aria-labelledby="t-areas">
+  <section class="sec" id="areas" aria-labelledby="t-areas" style="padding-top: 0;">
     <div class="wrap">
-      <div class="sec-head" data-reveal>
-        <span class="label">Áreas de atuação</span>
-        <h2 class="h2" id="t-areas">Atendimento técnico e humanizado em todas as áreas, do primeiro contato à conclusão do caso</h2>
+      <div class="sec-head">
+        <h2 class="h2" id="t-areas">Outras áreas de atuação</h2>
         <p>Cada área tem uma página com o que fazer primeiro, os documentos necessários e as perguntas mais comuns.</p>
       </div>
-      <div class="areas">
-        <a class="area area-dest" href={`/${destaque.id}/`} data-reveal>
-          <div>
-            <span class="label label-gold">Área principal</span>
-            <h3 class="h3">{destaque.data.nome}</h3>
-            <p>{destaque.data.resumoCard}</p>
-            <span class="more">{destaque.data.chamadaCard} →</span>
-          </div>
-          <ul class="lista">{destaque.data.listaCard?.map((i) => <li>{i}</li>)}</ul>
-        </a>
-        {outras.map((a, i) => (
-          <a class="area" href={`/${a.id}/`} data-reveal style={`--i:${i % 3}`}>
+      <div class="outras">
+        {outras.map((a) => (
+          <a class="outra" href={`/${a.id}/`}>
             <h3 class="h3">{a.data.nome}</h3>
             <p>{a.data.resumoCard}</p>
-            <span class="more">{a.data.chamadaCard} →</span>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <Etapas escura />
+  <Etapas />
 
   <Advogado />
 
-  <section class="night" aria-labelledby="t-capital">
-    <div class="wrap capital">
-      <div data-reveal>
-        <span class="label">Brasília · DF</span>
-        <h2 class="h2" id="t-capital">Na capital do país, perto de onde as decisões acontecem.</h2>
-        <p>Escritório no <a class="link-noite" href={escritorio.mapa} target="_blank" rel="noopener">Lago Norte, em Brasília</a>, com atendimento presencial com horário marcado. Para quem está em outro estado, todo o atendimento é feito à distância, com a mesma proximidade.</p>
-        <p class="small"><a class="link-noite" href={escritorio.mapa} target="_blank" rel="noopener">Ver o escritório no Google Maps</a></p>
-      </div>
-      <figure data-reveal>
-        <Picture src={congresso} formats={['avif', 'webp']} widths={[640, 960, 1280]} sizes="(max-width: 960px) 92vw, 640px" alt="Congresso Nacional, em Brasília, refletido no espelho d'água" loading="lazy" />
-        <figcaption>Congresso Nacional · Foto: Gustavo Leighton / Unsplash</figcaption>
-      </figure>
+  <section class="capital noite" aria-labelledby="t-capital">
+    <Picture src={congresso} formats={['avif', 'webp']} widths={[960, 1440, 1920]} sizes="100vw" alt="Congresso Nacional, em Brasília, refletido no espelho d'água" loading="lazy" />
+    <div class="capital-painel">
+      <h2 class="h2" id="t-capital">Na capital do país, perto de onde as decisões acontecem.</h2>
+      <p>Escritório no Lago Norte, em Brasília, com atendimento presencial com horário marcado. Para quem está em outro estado, todo o atendimento é feito à distância, com a mesma proximidade.</p>
+      <p><a class="link-noite" href={escritorio.mapa} target="_blank" rel="noopener">Ver o escritório no Google Maps</a></p>
     </div>
+    <p class="credito">Congresso Nacional. Foto de Gustavo Leighton, Unsplash.</p>
   </section>
 
   {artigos.length > 0 && (
     <section class="sec" aria-labelledby="t-artigos">
       <div class="wrap">
-        <div class="sec-head" data-reveal>
-          <span class="label">Artigos</span>
-          <h2 class="h2" id="t-artigos">Orientações para entender o seu caso</h2>
-        </div>
+        <div class="sec-head"><h2 class="h2" id="t-artigos">Orientações para entender o seu caso</h2></div>
         <div class="posts">
           {artigos.map((a) => (
-            <a class="post" href={`/artigos/${a.id}/`} data-reveal>
-              <span class="label label-gold">{areas.find((x) => x.id === a.data.area)?.data.nome}</span>
+            <a class="post" href={`/artigos/${a.id}/`}>
+              <span class="kicker">{areas.find((x) => x.id === a.data.area)?.data.nome}</span>
               <h3 class="h3">{a.data.title}</h3>
               <p>{a.data.description}</p>
             </a>

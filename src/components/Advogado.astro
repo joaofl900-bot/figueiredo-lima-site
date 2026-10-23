@@ -1,31 +1,31 @@
 ---
-// Bloco "advogado responsável", usado na home e nas áreas. A formação fica como no site atual.
+// Bloco do advogado responsável, num painel claro com borda dourada. Usado na home e nas áreas.
 import { Picture } from 'astro:assets';
 import couro from '../assets/fotos/joao-couro.jpg';
 import principal from '../assets/fotos/joao-principal.jpg';
 import { escritorio } from '../data/escritorio';
 
-interface Props { titulo?: string; foto?: 'couro' | 'principal'; id?: string }
-const { titulo = 'Sobre', foto = 'couro', id = 'sobre' } = Astro.props;
+interface Props { foto?: 'couro' | 'principal'; id?: string }
+const { foto = 'couro', id = 'sobre' } = Astro.props;
 const img = foto === 'couro' ? couro : principal;
 const posicao = foto === 'couro' ? '50% 62%' : '50% 28%';
 ---
-<section class="sec" id={id} aria-labelledby={`t-${id}`}>
-  <div class="wrap sobre">
-    <div class="crop" style="aspect-ratio: 4 / 5; max-width: 480px;" data-reveal>
-      <Picture src={img} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(max-width: 960px) 92vw, 480px" alt={`${escritorio.advogado} sentado em uma poltrona no escritório`} loading="lazy" style={`object-position: ${posicao}`} />
-    </div>
-    <div data-reveal>
-      <span class="label">{titulo}</span>
-      <h2 class="h2" id={`t-${id}`}>{escritorio.advogado}</h2>
-      <div class="rule"></div>
-      <p class="quote">Advogado com atuação em direito tributário, cível e público, formado pelo IDP, com estudos de pós-graduação em Direito Tributário, Direito Constitucional e Direitos Humanos pelo IDP e pela UnB.</p>
-      <p class="muted">Experiência em consultoria de empresas e escritórios de advocacia. Cada cliente é atendido pessoalmente, com explicações claras sobre cada etapa.</p>
-      <ul class="fatos">
-        <li><span class="label">Inscrição</span><span><b>{escritorio.oab}</b> · <a class="link" href={escritorio.cna} target="_blank" rel="noopener">confirmar no CNA</a></span></li>
-        <li><span class="label">Escritório</span><span>{escritorio.bairro}, {escritorio.cidade}/{escritorio.uf}</span></li>
-        <li><span class="label">Atendimento</span><span>Presencial com horário marcado e on-line em todo o Brasil</span></li>
-      </ul>
+<section class="sec" id={id} aria-labelledby={`t-${id}`} style="padding-top: 0;">
+  <div class="wrap">
+    <div class="painel sobre">
+      <div class="crop">
+        <Picture src={img} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(max-width: 960px) 92vw, 480px" alt={`${escritorio.advogado} sentado em uma poltrona no escritório`} loading="lazy" style={`object-position: ${posicao}`} />
+      </div>
+      <div class="sobre-texto">
+        <h2 class="h2" id={`t-${id}`}>{escritorio.advogado}</h2>
+        <p class="quote">Advogado com atuação em direito tributário, cível e público, formado pelo IDP, com estudos de pós-graduação em Direito Tributário, Direito Constitucional e Direitos Humanos pelo IDP e pela UnB.</p>
+        <p class="muted">Experiência em consultoria de empresas e escritórios de advocacia. Cada cliente é atendido pessoalmente, com explicações claras sobre cada etapa.</p>
+        <ul class="fatos">
+          <li><span>Inscrição</span><span><b>{escritorio.oab}</b>, <a class="link" href={escritorio.cna} target="_blank" rel="noopener">confirmar no CNA</a></span></li>
+          <li><span>Escritório</span><span>{escritorio.bairro}, {escritorio.cidade}/{escritorio.uf}</span></li>
+          <li><span>Atendimento</span><span>Presencial com horário marcado e on-line em todo o Brasil</span></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>

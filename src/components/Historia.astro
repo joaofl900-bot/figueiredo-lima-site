@@ -1,0 +1,51 @@
+---
+// A apresentação de uma área a partir da dor do cliente, como num carrossel: a pergunta,
+// quatro quadros (o problema, o risco, a saída e como atuo) e o fechamento em preto,
+// com foto, a frase-síntese, o que o serviço inclui e o botão. Usada na home e nas áreas.
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import BotaoWhatsApp from './BotaoWhatsApp.astro';
+
+interface Props {
+  id: string;
+  kicker?: string;
+  titulo: string;
+  quadros: { titulo: string; texto?: string }[];
+  frase: string;
+  texto?: string;
+  itens: string[];
+  botao: string;
+  mensagem?: string;
+  link?: { rotulo: string; href: string };
+  foto: ImageMetadata;
+  fotoAlt: string;
+  local: string;
+}
+const { id, kicker, titulo, quadros, frase, texto, itens, botao, mensagem, link, foto, fotoAlt, local } = Astro.props;
+---
+<section class="sec" id={id} aria-labelledby={`t-${id}`}>
+  <div class="wrap">
+    <div class="hist-cab">
+      {kicker && <p class="kicker">{kicker}</p>}
+      <h2 class="h2" id={`t-${id}`}>{titulo}</h2>
+    </div>
+    <div class="quadros">
+      {quadros.map((q) => <div class="quadro"><h3 class="h3">{q.titulo}</h3>{q.texto && <p>{q.texto}</p>}</div>)}
+    </div>
+    <div class="fecho noite">
+      <div class="fecho-foto">
+        <Picture src={foto} formats={['avif', 'webp']} widths={[480, 720, 960]} sizes="(max-width: 960px) 92vw, 420px" alt={fotoAlt} loading="lazy" />
+      </div>
+      <div class="fecho-texto">
+        <p class="fecho-frase">{frase}</p>
+        {texto && <p>{texto}</p>}
+        <ul class="lista">{itens.map((i) => <li>{i}</li>)}</ul>
+        <div class="acoes">
+          <BotaoWhatsApp rotulo={botao} mensagem={mensagem} local={local} grande ancora />
+          {link && <a class="link-noite" href={link.href}>{link.rotulo}</a>}
+        </div>
+        <p class="nota">A advocacia é atividade de meio. As alternativas de cada caso dependem da análise dos documentos e das regras vigentes.</p>
+      </div>
+    </div>
+  </div>
+</section>

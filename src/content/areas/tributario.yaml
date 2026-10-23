@@ -1,4 +1,5 @@
-# Área principal. Textos aprovados em 22/10/2026 (Fase 3).
+# Área principal. Textos aprovados em 22/10/2026 (Fase 3); topo e apresentação a partir da dor
+# do empresário reescritos em 23/10/2026 (Versão 2), em tom sóbrio por causa do Provimento 205/2021.
 ordem: 1
 principal: true
 nome: Tributário para empresas
@@ -12,15 +13,31 @@ listaCard:
 chamadaCard: Conhecer a assessoria mensal
 seoTitulo: Advogado tributarista em Brasília | Figueiredo Lima
 seoDescricao: Regularização fiscal, dívida ativa, parcelamento e transação com a PGFN, com assessoria mensal. Atendimento direto com o advogado, em Brasília e on-line.
-sobretitulo: Tributário para empresas · on-line em todo o Brasil
-h1: Regularização fiscal de empresas e assessoria tributária mensal
-abertura: "Débitos na Receita Federal, dívida ativa da União, parcelamento ou transação tributária: fale diretamente com o advogado e entenda as alternativas da sua empresa."
+sobretitulo: Tributário para empresas, em Brasília e on-line em todo o Brasil
+h1: Sua empresa deve tributos e não sabe como vai pagar?
+abertura: "Débitos na Receita Federal, dívida ativa da União, parcelamentos que não cabem no caixa. Antes de pagar ou parcelar, entenda o que pode ser revisto e quais caminhos a lei oferece para a sua empresa."
 botao: Falar sobre a minha empresa
 mensagemWhatsApp: Olá! Vim pelo site e gostaria de falar sobre a situação fiscal da minha empresa.
 linkSecundario: { rotulo: Como funciona a assessoria mensal, href: "#assessoria" }
-apoio: Atendimento direto com o advogado · análise e proposta por escrito · trabalho formalizado em contrato
+apoio: Análise e proposta por escrito, com o trabalho formalizado em contrato.
 foto: close
 avisoSimples: true
+historiaTitulo: Antes de pagar ou parcelar, entenda o cenário
+historia:
+  - { titulo: "Sem gestão, a dívida não fica parada", texto: "Ela cresce com juros e multa todo mês e pode levar a protesto, bloqueio de contas, execução fiscal e exclusão do Simples Nacional." }
+  - { titulo: "Parcelar no desespero pode virar uma bola de neve", texto: "Pagar ou parcelar sem análise jurídica, sem contestar o que pode ser contestado e sem estratégia compromete o caixa da empresa por anos." }
+  - { titulo: "A lei prevê caminhos para negociar", texto: "A transação tributária e outros programas de regularização preveem descontos e parcelamentos em prazos longos, conforme o perfil da dívida e os editais abertos." }
+  - { titulo: "Uma estratégia para o seu passivo fiscal", texto: "Levanto todos os débitos, verifico o que pode ser revisto, comparo as alternativas e acompanho os acordos todo mês." }
+fecho:
+  frase: O passivo fiscal não precisa comprometer o fluxo de caixa da sua empresa.
+  texto: Com um diagnóstico de todas as dívidas e uma estratégia definida, o pagamento é planejado para caber no caixa, e a assessoria mensal acompanha os acordos e as novas cobranças.
+  itens:
+    - Diagnóstico de todas as dívidas tributárias
+    - Revisão e contestação de débitos
+    - Transação com a PGFN e parcelamentos
+    - Defesa em autuações e execuções fiscais
+    - Regularização para manter o Simples Nacional
+    - Acompanhamento mensal dos acordos
 situacoesIntro: Estas são as situações que mais levam empresas a procurar orientação jurídica.
 situacoes:
   - { titulo: Dívida ativa da União, texto: "Inscrição na PGFN, protesto ou execução fiscal." }

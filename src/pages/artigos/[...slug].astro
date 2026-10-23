@@ -1,8 +1,12 @@
 ---
 // Página de cada artigo. O texto vem de src/content/artigos/<nome>.md (escrito pelo Pages CMS).
+// Topo preto com o título; o texto em bege; ao final, o bloco do autor com o convite para conversar.
+import { Image } from 'astro:assets';
 import { getCollection, getEntry, render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import BotaoWhatsApp from '../../components/BotaoWhatsApp.astro';
 import Chamada from '../../components/Chamada.astro';
+import avatar from '../../assets/fotos/joao-avatar.jpg';
 import { escritorio } from '../../data/escritorio';
 
 export async function getStaticPaths() {
@@ -41,21 +45,31 @@ const jsonld = [
 ];
 ---
 <Base titulo={`${artigo.data.title} | Figueiredo Lima`} descricao={artigo.data.description} jsonld={jsonld} tipoOg="article" mensagemWhatsApp={area?.data.mensagemWhatsApp}>
-  <article class="sec">
-    <div class="wrap">
-      <nav class="trilha" aria-label="Trilha de navegação">
-        <ol><li><a href="/">Início</a></li><li><a href="/artigos/">Artigos</a></li><li aria-current="page">{artigo.data.title}</li></ol>
-      </nav>
-      <header class="sec-head">
-        {area && <a class="label label-gold" href={`/${area.id}/`}>{area.data.nome}</a>}
-        <h1 class="h1">{artigo.data.title}</h1>
+  <article>
+    <header class="noite">
+      <div class="wrap topo-simples">
+        <nav class="trilha" aria-label="Trilha de navegação">
+          <ol><li><a href="/">Início</a></li><li><a href="/artigos/">Artigos</a></li><li aria-current="page">{artigo.data.title}</li></ol>
+        </nav>
+        {area && <p class="kicker" style="margin-bottom: 14px;"><a class="link-noite" href={`/${area.id}/`}>{area.data.nome}</a></p>}
+        <h1 class="h1" id="titulo">{artigo.data.title}</h1>
         <p class="lead">{artigo.data.description}</p>
-        <p class="micro">Por <a href="/sobre/">{escritorio.advogado}</a>, {escritorio.oab} · {data(artigo.data.date)} · {minutos} min de leitura</p>
-      </header>
+        <p class="micro" style="margin-top: 18px;">Por <a class="link-noite" href="/sobre/">{escritorio.advogado}</a>, {escritorio.oab}. Publicado em {data(artigo.data.date)}, {minutos} min de leitura.</p>
+      </div>
+    </header>
+    <div class="wrap sec">
       <div class="artigo">
         <Content />
-        <p class="small muted" style="margin-top: var(--space-7);">Conteúdo informativo, que não substitui a análise individual de cada caso.{area && <> Saiba mais sobre <a href={`/${area.id}/`}>{area.data.nome.toLowerCase()}</a>.</>}</p>
+        <p class="small muted" style="margin-top: var(--space-6);">Conteúdo informativo, que não substitui a análise individual de cada caso.{area && <> Saiba mais sobre <a href={`/${area.id}/`}>{area.data.nome.toLowerCase()}</a>.</>}</p>
       </div>
+      <aside class="autor" aria-label="Sobre o autor">
+        <Image src={avatar} alt="" width={144} height={144} loading="lazy" />
+        <div>
+          <h2 class="h3">Escrito por {escritorio.advogado}</h2>
+          <p>Advogado, {escritorio.oab}. Se este é o seu caso, me envie uma mensagem com o que aconteceu. Eu mesmo leio e respondo.</p>
+          <div class="acoes"><BotaoWhatsApp rotulo={area?.data.botao ?? 'Falar com o advogado'} mensagem={area?.data.mensagemWhatsApp} local="artigo-autor" /></div>
+        </div>
+      </aside>
     </div>
   </article>
   <Chamada titulo={area?.data.chamadaTitulo ?? 'Precisa de orientação jurídica?'} texto={area?.data.chamadaTexto ?? 'Envie seu caso pelo WhatsApp. Eu mesmo leio e respondo.'} mensagem={area?.data.mensagemWhatsApp} />

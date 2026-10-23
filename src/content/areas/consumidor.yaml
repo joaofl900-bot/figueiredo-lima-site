@@ -3,12 +3,21 @@ nome: Direito do consumidor
 resumoCard: Cobranças indevidas, negativação, produtos com defeito e golpes bancários.
 seoTitulo: Advogado do consumidor em Brasília | Figueiredo Lima
 seoDescricao: Cobrança indevida, nome negativado, produto com defeito ou golpe bancário? Entenda seus direitos e fale direto com o advogado.
-sobretitulo: Direito do consumidor · Brasília e todo o Brasil
-h1: Advogado do consumidor em Brasília
+sobretitulo: Direito do consumidor, em Brasília e on-line em todo o Brasil
+h1: Cobrado pelo que não deve, com o nome negativado ou vítima de golpe no banco?
 abertura: "Cobrança que você não reconhece, nome negativado sem dívida, compra que não chegou ou golpe no banco: explico o que o Código de Defesa do Consumidor garante e qual é o melhor caminho para o seu caso."
 botao: Falar sobre o meu caso
 mensagemWhatsApp: Olá! Vim pelo site e preciso de orientação sobre um problema de consumo.
 foto: principal
+historiaTitulo: Antes de pagar ou desistir, entenda seus direitos
+historia:
+  - { titulo: "Pagar não encerra o direito", texto: "Quem paga uma cobrança indevida pode ter direito à devolução em dobro do que pagou a mais, com correção e juros, salvo engano justificável do fornecedor (CDC, art. 42)." }
+  - { titulo: "Nome negativado sem dívida pesa no dia a dia", texto: "A negativação indevida dificulta compras e financiamentos e pode levar ao pedido de exclusão do registro e de indenização, conforme o caso." }
+  - { titulo: "Guardar provas faz diferença", texto: "Protocolos, prints, faturas e, no caso de golpe, o boletim de ocorrência sustentam a reclamação e um eventual processo." }
+  - { titulo: "Um caminho proporcional ao problema", texto: "Reclamação à empresa e nos canais oficiais, acordo quando possível e ação judicial, inclusive no Juizado Especial, quando necessário." }
+fecho:
+  frase: Você não precisa enfrentar sozinho a empresa ou o banco.
+  texto: Com as provas organizadas e o direito explicado, você decide o próximo passo com segurança.
 situacoes:
   - { titulo: Cobranças indevidas e negativação do nome }
   - { titulo: Produtos com defeito ou não entregues }
