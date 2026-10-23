@@ -77,10 +77,31 @@
     });
   });
 
+  /* Origem do contato: quem chega por anúncio (gclid ou utm_medium=cpc) manda "Vi o anúncio do escritório"
+     no lugar de "Vim pelo site", sem código visível ao cliente; "Olá, tudo bem?" marca as campanhas de SP. O gclid não é guardado;
+     só a campanha fica na sessão, para valer também nas outras páginas da mesma visita. */
+  var campanha = null;
+  try {
+    var q = new URLSearchParams(location.search);
+    if (q.get('gclid') || q.get('gbraid') || q.get('wbraid') || /^(cpc|ppc|paid|paidsearch)$/i.test(q.get('utm_medium') || '')) {
+      sessionStorage.setItem('fl_anuncio', (q.get('utm_campaign') || 'anuncio').slice(0, 20).toLowerCase());
+    }
+    campanha = sessionStorage.getItem('fl_anuncio');
+  } catch (e) {}
+  if (campanha) {
+    var ola = /^sp/.test(campanha) ? 'Olá, tudo bem? ' : 'Olá! ';
+    document.querySelectorAll('a[href*="wa.me/"]').forEach(function (a) {
+      var partes = a.href.split('?text=');
+      if (partes.length < 2) return;
+      var msg = decodeURIComponent(partes[1]).replace(/^Olá! Vim pelo site( do escritório)?/, ola + 'Vi o anúncio do escritório');
+      a.href = partes[0] + '?text=' + encodeURIComponent(msg);
+    });
+  }
+
   /* Medição: cada clique no WhatsApp vira um evento no dataLayer (o GTM só é ativado na Fase 7, com consentimento) */
   window.dataLayer = window.dataLayer || [];
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-evento]');
-    if (a) window.dataLayer.push({ event: a.getAttribute('data-evento'), local: a.getAttribute('data-local') || '', pagina: location.pathname });
+    if (a) window.dataLayer.push({ event: a.getAttribute('data-evento'), local: a.getAttribute('data-local') || '', pagina: location.pathname, campanha: campanha || '' });
   });
 })();
