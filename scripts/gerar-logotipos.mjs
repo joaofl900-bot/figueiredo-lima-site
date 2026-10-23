@@ -1,18 +1,21 @@
-// Gera as versões do logotipo oficial para fundo escuro e as faixas pretas das peças jurídicas.
-// O desenho do logotipo não muda. Sobre o preto do site (#1B1814) ele usa o mesmo dourado claro do site
-// (#C9A54A), padronizado com o texto do rodapé das peças; sobre fundo claro continua o dourado original.
-// Uso: node scripts/gerar-logotipo-preto.mjs   (grava em identidade/)
+// Gera as versões do logotipo oficial e as faixas bege das peças jurídicas.
+// O desenho do logotipo não muda, só o tom do dourado conforme o fundo:
+// sobre o bege do site (#F3EEE6), o dourado de texto do site (#7A5D10), mais firme que o original;
+// sobre o preto do site (#1B1814), o dourado claro (#C9A54A).
+// Uso: node scripts/gerar-logotipos.mjs   (grava em identidade/ e o logotipo do site em src/assets/)
 import sharp from 'sharp';
 import { mkdirSync } from 'node:fs';
 
 const saida = 'identidade';
+const bege = { r: 0xF3, g: 0xEE, b: 0xE6 };
 const preto = { r: 0x1B, g: 0x18, b: 0x14 };
-const ouro = { r: 0xC9, g: 0xA5, b: 0x4A };
+const ouroBege = { r: 0x7A, g: 0x5D, b: 0x10 };
+const ouroPreto = { r: 0xC9, g: 0xA5, b: 0x4A };
 mkdirSync(saida, { recursive: true });
 
-// Troca o dourado original pelo dourado claro, preservando a transparência e as nuances do desenho:
+// Troca o dourado original por outro tom, preservando a transparência e as nuances do desenho:
 // cada pixel recebe o novo tom na proporção do seu brilho em relação ao brilho médio das letras.
-function dourarClaro(rgba) {
+function dourar(rgba, ouro) {
   const lum = (i) => 0.2126 * rgba[i] + 0.7152 * rgba[i + 1] + 0.0722 * rgba[i + 2];
   let soma = 0, n = 0;
   for (let i = 0; i < rgba.length; i += 4) if (rgba[i + 3] > 200) { soma += lum(i); n++; }
@@ -28,15 +31,22 @@ function dourarClaro(rgba) {
   return out;
 }
 
+async function comFundo(rgba, width, height, margem, fundo, arquivo) {
+  const camada = await sharp(rgba, { raw: { width, height, channels: 4 } }).png().toBuffer();
+  await sharp({ create: { width: width + 2 * margem.x, height: height + 2 * margem.y, channels: 3, background: fundo } })
+    .composite([{ input: camada, left: margem.x, top: margem.y }]).png().toFile(arquivo);
+}
+
 async function versoes(nome, rgba, width, height, margem) {
   const raw = { raw: { width, height, channels: 4 } };
   await sharp(rgba, raw).png().toFile(`${saida}/${nome}-transparente.png`);
-  const claro = dourarClaro(rgba);
-  await sharp(claro, raw).png().toFile(`${saida}/${nome}-dourado-claro.png`);
-  const camada = await sharp(claro, raw).png().toBuffer();
-  await sharp({ create: { width: width + 2 * margem.x, height: height + 2 * margem.y, channels: 3, background: preto } })
-    .composite([{ input: camada, left: margem.x, top: margem.y }]).png().toFile(`${saida}/${nome}-preto.png`);
-  return claro;
+  const paraBege = dourar(rgba, ouroBege);
+  const paraPreto = dourar(rgba, ouroPreto);
+  await sharp(paraBege, raw).png().toFile(`${saida}/${nome}-dourado-bege.png`);
+  await sharp(paraPreto, raw).png().toFile(`${saida}/${nome}-dourado-claro.png`);
+  await comFundo(paraBege, width, height, margem, bege, `${saida}/${nome}-bege.png`);
+  await comFundo(paraPreto, width, height, margem, preto, `${saida}/${nome}-preto.png`);
+  return paraBege;
 }
 
 // Logotipo quadrado: separa o dourado do creme. Cada pixel é uma mistura de dourado e creme; o canal azul
@@ -58,27 +68,27 @@ await versoes('logotipo-quadrado', quadrado, info.width, info.height, { x: 0, y:
 
 // Logotipo horizontal (o do cabeçalho do site, já transparente).
 const { data: hData, info: hInfo } = await sharp('src/assets/logo.png').ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-const horizontalClaro = await versoes('logotipo-horizontal', hData, hInfo.width, hInfo.height,
+const horizontal = await versoes('logotipo-horizontal', hData, hInfo.width, hInfo.height,
   { x: Math.round(hInfo.width * 0.12), y: Math.round(hInfo.height * 0.6) });
+await sharp(horizontal, { raw: { width: hInfo.width, height: hInfo.height, channels: 4 } }).png().toFile('src/assets/logo-dourado-bege.png');
 
-// Faixas pretas das peças (folha A4 de ponta a ponta, 300 dpi): cabeçalho com o logotipo no centro e
-// fio dourado embaixo; rodapé com fio dourado em cima (o texto do rodapé fica editável no Word).
+// Faixas bege das peças (folha A4 de ponta a ponta, 300 dpi): cabeçalho com o logotipo no centro e
+// fio dourado embaixo; rodapé todo bege, sem fio (o texto do rodapé fica editável no Word).
 const cm = (v) => Math.round((v / 2.54) * 300);
 const fio = 4;
 const larguraA4 = cm(21);
 const altoCab = cm(2.5);
 const logoAlto = cm(0.95);
-const logoCab = await sharp(horizontalClaro, { raw: { width: hInfo.width, height: hInfo.height, channels: 4 } })
+const logoCab = await sharp(horizontal, { raw: { width: hInfo.width, height: hInfo.height, channels: 4 } })
   .resize({ height: logoAlto }).png().toBuffer();
 const { width: logoLargo } = await sharp(logoCab).metadata();
-const fioOuro = await sharp({ create: { width: larguraA4, height: fio, channels: 3, background: ouro } }).png().toBuffer();
-await sharp({ create: { width: larguraA4, height: altoCab, channels: 3, background: preto } })
+const fioOuro = await sharp({ create: { width: larguraA4, height: fio, channels: 3, background: ouroBege } }).png().toBuffer();
+await sharp({ create: { width: larguraA4, height: altoCab, channels: 3, background: bege } })
   .composite([
     { input: logoCab, left: Math.round((larguraA4 - logoLargo) / 2), top: Math.round((altoCab - fio - logoAlto) / 2) },
     { input: fioOuro, left: 0, top: altoCab - fio },
   ])
   .png({ palette: true, colours: 64 }).toFile(`${saida}/faixa-cabecalho.png`);
-await sharp({ create: { width: larguraA4, height: cm(2.1), channels: 3, background: preto } })
-  .composite([{ input: fioOuro, left: 0, top: 0 }])
-  .png({ palette: true, colours: 8 }).toFile(`${saida}/faixa-rodape.png`);
+await sharp({ create: { width: larguraA4, height: cm(2.1), channels: 3, background: bege } })
+  .png({ palette: true, colours: 2 }).toFile(`${saida}/faixa-rodape.png`);
 console.log('ok');

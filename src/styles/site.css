@@ -1,5 +1,6 @@
 /* Figueiredo Lima Advocacia: estilos do site (Versão 2, aprovada em 23/10/2026).
-   Bege, dourado e preto. Topos em preto com o dourado em destaque; o conteúdo em bege.
+   Bege, dourado e preto. Cabeçalho e rodapé em bege, como a identidade do escritório; topos em preto
+   com o dourado em destaque; o conteúdo em bege.
    Tokens primeiro; depois base, componentes, páginas e movimento. */
 
 /* Fontes hospedadas no próprio site (licença OFL em /fonts/). Newsreader usa "optional" para o título
@@ -20,7 +21,7 @@
   --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
   --radius-sm: 3px; --radius-pill: 999px;
   --shadow-float: 0 6px 20px rgba(31, 28, 23, 0.18);
-  --shadow-header: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-header: 0 8px 24px rgba(31, 28, 23, 0.16);
   --content-max: 74rem; --measure: 44rem;
   --header-h: 76px; --header-h-compact: 60px;
   --ease-out: cubic-bezier(.2, .7, .2, 1);
@@ -36,7 +37,7 @@ img { display: block; max-width: 100%; height: auto; }
 a { color: var(--gold-text); }
 p, figure { margin: 0; }
 :where(a, button, summary):focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
-.noite :where(a, button, summary):focus-visible, .hdr :where(a, button):focus-visible, .menu :where(a, button):focus-visible, .ftr :where(a, button):focus-visible { outline-color: var(--focus-on-night); }
+.noite :where(a, button, summary):focus-visible { outline-color: var(--focus-on-night); }
 [id] { scroll-margin-top: calc(var(--header-h-compact) + 16px); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .skip { position: absolute; left: 16px; top: -100px; z-index: 50; background: var(--surface); color: var(--ink); padding: 10px 16px; border-radius: var(--radius-sm); font-weight: 600; text-decoration: none; }
@@ -79,25 +80,25 @@ p, figure { margin: 0; }
 .link-noite:hover, .noite .link:hover { color: #fff; text-decoration-thickness: 2px; }
 .acoes { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 
-/* Cabeçalho preto: diminui ao rolar (classe is-compact, posta pelo JS) */
-.hdr { position: sticky; top: 0; z-index: 20; background: var(--night); border-bottom: 1px solid var(--gold-line-night); }
+/* Cabeçalho bege: diminui ao rolar (classe is-compact, posta pelo JS) */
+.hdr { position: sticky; top: 0; z-index: 20; background: var(--surface); border-bottom: 2px solid var(--gold); }
 .hdr-in { max-width: var(--content-max); margin: 0 auto; padding-inline: 40px; height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); }
 .hdr-logo img { height: 32px; width: auto; }
 .nav { display: flex; align-items: center; gap: 28px; font-size: 15px; }
-.nav a:not(.btn) { color: var(--on-night); text-decoration: none; padding-block: 6px; border-bottom: 1px solid transparent; }
-.nav a:not(.btn):hover, .nav a[aria-current="page"] { border-bottom-color: var(--gold-on-night); }
+.nav a:not(.btn) { color: var(--ink); text-decoration: none; padding-block: 6px; border-bottom: 1px solid transparent; }
+.nav a:not(.btn):hover, .nav a[aria-current="page"] { border-bottom-color: var(--gold); }
 .nav .btn { min-height: 40px; padding: 8px 16px; font-size: 15px; }
-.menu-btn { display: none; width: 44px; height: 44px; border: 1px solid var(--gold-line-night); border-radius: var(--radius-sm); background: transparent; color: var(--on-night); align-items: center; justify-content: center; cursor: pointer; }
+.menu-btn { display: none; width: 44px; height: 44px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: transparent; color: var(--ink); align-items: center; justify-content: center; cursor: pointer; }
 .menu-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; }
 .menu-btn .ico-x { display: none; }
 .menu-btn[aria-expanded="true"] .ico-bars { display: none; }
 .menu-btn[aria-expanded="true"] .ico-x { display: block; }
 
-/* Menu do celular: painel preto em tela cheia abaixo do cabeçalho */
+/* Menu do celular: painel bege em tela cheia abaixo do cabeçalho */
 .menu { display: none; }
 .menu[data-open] { display: flex; }
-.menu { position: fixed; inset: var(--header-h-compact) 0 0 0; z-index: 19; background: var(--night); flex-direction: column; padding: var(--space-5) var(--space-4) calc(var(--space-6) + env(safe-area-inset-bottom, 0px)); overflow-y: auto; }
-.menu a:not(.btn) { display: block; padding-block: 16px; border-bottom: 1px solid var(--line-night); font: 500 24px/1.25 var(--font-serif); color: var(--on-night); text-decoration: none; }
+.menu { position: fixed; inset: var(--header-h-compact) 0 0 0; z-index: 19; background: var(--surface); flex-direction: column; padding: var(--space-5) var(--space-4) calc(var(--space-6) + env(safe-area-inset-bottom, 0px)); overflow-y: auto; }
+.menu a:not(.btn) { display: block; padding-block: 16px; border-bottom: 1px solid var(--line); font: 500 24px/1.25 var(--font-serif); color: var(--ink); text-decoration: none; }
 .menu .btn { margin-top: var(--space-6); width: 100%; }
 body.menu-aberto { overflow: hidden; }
 
@@ -255,19 +256,19 @@ body.menu-aberto { overflow: hidden; }
 .aviso-card .link-noite { font-size: 15px; }
 .aviso-card :where(a):focus-visible { outline-color: var(--focus-on-night); }
 
-/* Chamada final (preta) e rodapé */
+/* Chamada final (preta) e rodapé (bege) */
 .cta { display: flex; justify-content: space-between; align-items: center; gap: var(--space-6); flex-wrap: wrap; padding-block: 72px; }
 .cta-who { display: flex; align-items: center; gap: 22px; }
 .cta .h2 { font-size: 32px; }
 .avatar { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold-on-night); flex: none; }
-.ftr { background: var(--night); color: var(--on-night-muted); font-size: 14px; line-height: 1.7; border-top: 1px solid var(--gold-line-night); }
+.ftr { background: var(--surface); color: var(--ink-muted); font-size: 14px; line-height: 1.7; border-top: 2px solid var(--gold); }
 .ftr-in { max-width: var(--content-max); margin: 0 auto; padding: var(--space-8) 40px var(--space-5); display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); }
-.ftr h2 { margin: 0 0 var(--space-2); font: 600 15px/1.4 var(--font-sans); color: var(--gold-on-night); }
-.ftr a { color: var(--on-night); }
+.ftr h2 { margin: 0 0 var(--space-2); font: 600 15px/1.4 var(--font-sans); color: var(--gold-text); }
+.ftr a { color: var(--ink); }
 .ftr ul { list-style: none; margin: 0; padding: 0; }
 .ftr address { font-style: normal; }
 .ftr-logo { height: 30px; width: auto; margin-bottom: 14px; }
-.ftr-legal { grid-column: 1 / -1; border-top: 1px solid var(--line-night); padding-top: var(--space-4); font-size: 13px; }
+.ftr-legal { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: var(--space-4); font-size: 13px; }
 
 /* WhatsApp flutuante: só aparece quando nenhum outro botão verde está na tela (JS põe is-visible) */
 .wa-float { position: fixed; right: max(var(--space-5), env(safe-area-inset-right, 0px)); bottom: max(var(--space-5), env(safe-area-inset-bottom, 0px)); z-index: 15; border-radius: var(--radius-pill); box-shadow: var(--shadow-float); opacity: 0; transform: translateY(16px); pointer-events: none; visibility: hidden; transition: opacity .3s var(--ease-out), transform .3s var(--ease-out), visibility 0s linear .3s; }

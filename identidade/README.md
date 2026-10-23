@@ -1,6 +1,6 @@
 # Identidade visual e padrão de peças: Figueiredo Lima Advocacia
 
-Recomendação interna, aprovada em 23/10/2026. Vale para **toda petição, parecer, notificação, contrato ou outro documento** produzido pelo escritório, inclusive os redigidos com o Claude.
+Recomendação interna, atualizada em 23/10/2026 (padrão bege). Vale para **toda petição, parecer, notificação, contrato ou outro documento** produzido pelo escritório, inclusive os redigidos com o Claude.
 
 Esta pasta não faz parte do site público: nada aqui é publicado em figueiredolima.adv.br.
 
@@ -8,14 +8,15 @@ Esta pasta não faz parte do site público: nada aqui é publicado em figueiredo
 
 | Uso | Cor | Hex |
 |---|---|---|
-| Fundo escuro (faixas, topo do site) | Preto do site | `#1B1814` |
-| Dourado sobre fundo escuro (logotipo, rodapé, fios) | Dourado claro | `#C9A54A` |
-| Dourado sobre fundo claro (logotipo original) | Dourado original | `#8B6A14` |
-| Fundo claro de quadros e destaques | Bege | `#F3EEE6` |
+| Fundo da identidade (faixas das peças, cabeçalho e rodapé do site) | Bege do site | `#F3EEE6` |
+| Dourado sobre o bege (logotipo, texto do rodapé, fio do cabeçalho) | Dourado do site | `#7A5D10` |
+| Fundo escuro (topos das páginas do site, perfis escuros) | Preto do site | `#1B1814` |
+| Dourado sobre o preto | Dourado claro | `#C9A54A` |
+| Fundo de quadros e destaques nas peças | Bege | `#F3EEE6` |
 | Linhas de quadros | Linha bege | `#DDD3C3` |
 | Texto | Preto | automático |
 
-Regra: sobre o preto, o dourado é sempre `#C9A54A`; sobre o claro, o dourado original. Não misturar os dois tons no mesmo fundo.
+Regra: sobre o bege, o dourado é sempre `#7A5D10`; sobre o preto, sempre `#C9A54A`. Não misturar os dois tons no mesmo fundo.
 
 ## 2. Logotipo
 
@@ -23,22 +24,25 @@ O desenho do logotipo é único e **não pode ser alterado, recortado nem virar 
 
 | Arquivo | Quando usar |
 |---|---|
-| `logotipo-quadrado-preto.png` | Perfis e documentos com fundo escuro (quadrado) |
-| `logotipo-horizontal-preto.png` | Cabeçalhos e assinaturas de e-mail com fundo escuro |
-| `logotipo-quadrado-dourado-claro.png`, `logotipo-horizontal-dourado-claro.png` | Sobre qualquer fundo escuro (PNG transparente) |
-| `logotipo-quadrado-transparente.png`, `logotipo-horizontal-transparente.png` | Sobre fundo claro (dourado original, PNG transparente) |
+| `logotipo-quadrado-bege.png`, `logotipo-horizontal-bege.png` | Padrão: perfis, assinaturas de e-mail e documentos (fundo bege já aplicado) |
+| `logotipo-quadrado-dourado-bege.png`, `logotipo-horizontal-dourado-bege.png` | Sobre fundo bege ou branco (PNG transparente, dourado `#7A5D10`) |
+| `logotipo-quadrado-preto.png`, `logotipo-horizontal-preto.png` | Só quando o fundo precisar ser escuro |
+| `logotipo-quadrado-dourado-claro.png`, `logotipo-horizontal-dourado-claro.png` | Sobre qualquer fundo escuro (PNG transparente, dourado `#C9A54A`) |
+| `logotipo-quadrado-transparente.png`, `logotipo-horizontal-transparente.png` | Dourado original do arquivo de origem, só para referência |
 
-Para gerar de novo: `node scripts/gerar-logotipo-preto.mjs`.
+Para gerar de novo: `node scripts/gerar-logotipos.mjs` (grava também o logotipo do site em `src/assets/logo-dourado-bege.png`).
 
 ## 3. Modelo de peça: `modelo-peticao-figueiredo-lima.docx`
 
 Toda peça nova parte deste arquivo. Ele já traz o cabeçalho e o rodapé; só o corpo muda.
 
-**Página:** A4. Margens: superior 3 cm, esquerda 3 cm, direita 2 cm, inferior 2,4 cm (o texto não encosta na faixa do rodapé).
+**Página:** A4, fundo branco. Margens: superior 3 cm, esquerda 3 cm, direita 2 cm, inferior 2,4 cm (o texto não encosta na faixa do rodapé). Distância do cabeçalho 1 cm; distância do rodapé 0 (é o que deixa a faixa colada na borda e o texto no meio dela).
 
-**Cabeçalho:** faixa preta de ponta a ponta da folha (2,5 cm), com o logotipo em dourado claro no centro e fio dourado embaixo (`faixa-cabecalho.png`, atrás do texto).
+**Cabeçalho:** faixa bege `#F3EEE6` de ponta a ponta da folha (2,5 cm), com o logotipo em dourado `#7A5D10` no centro e fio dourado embaixo (`faixa-cabecalho.png`, atrás do texto).
 
-**Rodapé:** faixa preta de ponta a ponta (2,1 cm), fio dourado em cima (`faixa-rodape.png`) e três linhas em Garamond 8, dourado `#C9A54A`, centralizadas: endereço completo, telefone e e-mail, nome e OAB.
+**Rodapé:** faixa toda bege, sem fio, de ponta a ponta e colada na borda de baixo (2,1 cm, `faixa-rodape.png`), com três linhas em Garamond 8, dourado `#7A5D10`, centralizadas na horizontal e na vertical: endereço completo, telefone e e-mail, nome e OAB. Entrelinha simples; a última linha tem 17,5 pt de espaço depois, o que põe o bloco no meio da faixa.
+
+As duas faixas ficam presas ao **cabeçalho**, com posição medida a partir da página. Assim o Word e o Google Docs mostram o rodapé igual (o Google Docs desloca imagens presas ao rodapé e deixava uma tira branca embaixo). Testado com exportação em PDF pelo Google Docs em 23/10/2026.
 
 **Corpo (Arial):**
 
@@ -61,6 +65,8 @@ Toda peça nova parte deste arquivo. Ele já traz o cabeçalho e o rodapé; só 
 
 **Outros documentos** (notificação, contrato, declaração): mesmo cabeçalho, rodapé e corpo em Arial 12, com as seções que o documento pedir.
 
+A versão com faixas pretas (outubro de 2026) foi substituída por esta e fica só no histórico do Git (commit e9e27ab).
+
 ## 4. Como criar uma peça nova (inclusive pelo Claude)
 
 1. Copiar `modelo-peticao-figueiredo-lima.docx` e dar o nome da peça.
@@ -71,4 +77,4 @@ Toda peça nova parte deste arquivo. Ele já traz o cabeçalho e o rodapé; só 
 
 Dados de clientes e peças reais **não** entram neste repositório; aqui fica só o modelo em branco.
 
-Para refazer o modelo a partir de uma petição de origem: `python scripts/gerar-modelo-peticao.py <origem.docx> <saida-restilizada.docx> <saida-modelo.docx>`.
+Para refazer o modelo a partir de uma petição de origem: `python scripts/gerar-modelo-peticao.py <origem.docx> <saida-restilizada.docx> <saida-modelo.docx>` (rodar antes `node scripts/gerar-logotipos.mjs`, que gera as faixas).

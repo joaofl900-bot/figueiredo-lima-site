@@ -1,4 +1,4 @@
-# Gera as peças no padrão visual do escritório (Versão 2 do site): faixa preta de ponta a ponta no
+# Gera as peças no padrão visual do escritório: faixa bege (o bege do site) de ponta a ponta no
 # cabeçalho, com o logotipo oficial em dourado, e no rodapé, com os dados em dourado; corpo em Arial,
 # como nas petições atuais. Usa só a biblioteca padrão do Python.
 #
@@ -19,7 +19,7 @@ LARGURA = 7560000
 ALTO_CAB = 900000      # 2,5 cm
 ALTO_ROD = 756000      # 2,1 cm
 ALTO_FOLHA = 10692130  # 16838 twips
-OURO = 'C9A54A'        # dourado sobre o preto, igual ao do site
+OURO = '7A5D10'        # dourado sobre o bege, igual ao do site (logotipo e texto)
 
 NS_A = 'http://schemas.openxmlformats.org/drawingml/2006/main'
 NS_PIC = 'http://schemas.openxmlformats.org/drawingml/2006/picture'
@@ -44,31 +44,36 @@ def faixa(rid, nome, id_, y, alto):
     )
 
 
-def linha_rodape(texto):
+# Rodapé: três linhas simples de Garamond 8 (cerca de 27 pt) no meio da faixa bege de 2,1 cm (59,5 pt). Com a
+# distância do rodapé em zero, a última linha leva 17,5 pt de espaço depois, e o bloco fica centrado na vertical.
+def linha_rodape(texto, depois=0):
     return (
-        '<w:p><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/><w:jc w:val="center"/></w:pPr>'
+        f'<w:p><w:pPr><w:spacing w:before="0" w:after="{depois}" w:line="240" w:lineRule="auto"/><w:jc w:val="center"/></w:pPr>'
         '<w:r><w:rPr><w:rFonts w:ascii="Garamond" w:cs="Garamond" w:eastAsia="Garamond" w:hAnsi="Garamond"/>'
         f'<w:color w:val="{OURO}"/><w:sz w:val="16"/><w:szCs w:val="16"/></w:rPr>'
         f'<w:t xml:space="preserve">{texto}</w:t></w:r></w:p>'
     )
 
 
+# As duas faixas ficam presas ao cabeçalho, medidas a partir da página: o Google Docs respeita essa posição
+# no cabeçalho, mas desloca imagens presas ao rodapé.
 def novo_cabecalho(raiz_original):
     return (
         f'{raiz_original}<w:p><w:pPr><w:spacing w:after="0"/></w:pPr>'
-        f'{faixa("rIdFaixaCab", "Faixa do cabeçalho", 1001, 0, ALTO_CAB)}</w:p></w:hdr>'
+        f'{faixa("rIdFaixaCab", "Faixa do cabeçalho", 1001, 0, ALTO_CAB)}'
+        f'{faixa("rIdFaixaRod", "Faixa do rodapé", 1002, ALTO_FOLHA - ALTO_ROD, ALTO_ROD)}</w:p></w:hdr>'
     )
 
 
 def novo_rodape(raiz_original, linhas):
-    primeira = linha_rodape(linhas[0]).replace(
-        '</w:pPr>', '</w:pPr>' + faixa('rIdFaixaRod', 'Faixa do rodapé', 1002, ALTO_FOLHA - ALTO_ROD, ALTO_ROD), 1)
-    return raiz_original + primeira + ''.join(linha_rodape(t) for t in linhas[1:]) + '</w:ftr>'
+    corpo = ''.join(linha_rodape(t) for t in linhas[:-1])
+    return raiz_original + corpo + linha_rodape(linhas[-1], depois=350) + '</w:ftr>'
 
 
-REL = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/'
-       'package/2006/relationships"><Relationship Id="{rid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/'
-       'relationships/image" Target="media/{alvo}"/></Relationships>')
+RELS = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/'
+        'package/2006/relationships">{}</Relationships>')
+IMG = ('<Relationship Id="{rid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" '
+       'Target="media/{alvo}"/>')
 
 # Cores das tabelas trocadas pelas do site (bege do fundo, bege claro e linha).
 CORES = {'F3EEE2': 'F3EEE6', 'F8F5EE': 'FAF7F2', 'BFB49A': 'DDD3C3'}
@@ -186,8 +191,9 @@ def gerar(origem, destino, modelo=False):
     linhas = [t for t in (textos(p) for p in re.findall(r'<w:p>.*?</w:p>', rod)) if t]
     partes['word/header1.xml'] = novo_cabecalho(raiz_cab).encode('utf8')
     partes['word/footer1.xml'] = novo_rodape(raiz_rod, linhas).encode('utf8')
-    partes['word/_rels/header1.xml.rels'] = REL.format(rid='rIdFaixaCab', alvo='faixa-cabecalho.png').encode('utf8')
-    partes['word/_rels/footer1.xml.rels'] = REL.format(rid='rIdFaixaRod', alvo='faixa-rodape.png').encode('utf8')
+    partes['word/_rels/header1.xml.rels'] = RELS.format(
+        IMG.format(rid='rIdFaixaCab', alvo='faixa-cabecalho.png') + IMG.format(rid='rIdFaixaRod', alvo='faixa-rodape.png')).encode('utf8')
+    partes['word/_rels/footer1.xml.rels'] = RELS.format('').encode('utf8')
     partes['word/media/faixa-cabecalho.png'] = FAIXA_CAB.read_bytes()
     partes['word/media/faixa-rodape.png'] = FAIXA_ROD.read_bytes()
 
@@ -196,7 +202,7 @@ def gerar(origem, destino, modelo=False):
         doc = doc.replace(velha, nova)
     # Margens: o texto termina acima da faixa do rodapé, com folga.
     doc = re.sub(r'<w:pgMar [^>]*/>', '<w:pgMar w:top="1701" w:right="1134" w:bottom="1361" w:left="1701" '
-                 'w:header="567" w:footer="340" w:gutter="0"/>', doc)
+                 'w:header="567" w:footer="0" w:gutter="0"/>', doc)
     if modelo:
         inicio, itens, fim = elementos_do_corpo(doc)
         doc = inicio + ''.join(corpo_do_modelo(itens)) + fim
