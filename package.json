@@ -5,17 +5,17 @@
   "description": "Site da Figueiredo Lima Advocacia (figueiredolima.adv.br), feito com Astro e publicado na Cloudflare.",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/csp.mjs",
     "preview": "astro preview",
-    "deploy": "astro build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
-    "@astrojs/sitemap": "3.7.4",
-    "astro": "7.3.8"
+    "@astrojs/sitemap": "3.7.5",
+    "astro": "7.4.10"
   },
   "devDependencies": {
     "potrace": "^2.1.8",
-    "wrangler": "4.151.3"
+    "wrangler": "4.160.1"
   },
   "engines": {
     "node": ">=22.12.0"
