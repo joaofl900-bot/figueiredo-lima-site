@@ -226,6 +226,8 @@ def gerar(origem, destino, modelo=False):
         inicio, itens, fim = elementos_do_corpo(doc)
         doc = inicio + ''.join(corpo_do_modelo(itens)) + fim
         partes['word/comments.xml'] = re.sub(r'<w:comment\b.*</w:comment>', '', partes['word/comments.xml'].decode('utf8'), flags=re.S).encode('utf8')
+        # O título da peça de origem pode citar processo de cliente; o modelo sai sem ele.
+        partes['docProps/core.xml'] = re.sub(r'<dc:title>.*?</dc:title>', '<dc:title></dc:title>', partes['docProps/core.xml'].decode('utf8'), flags=re.S).encode('utf8')
     partes['word/document.xml'] = doc.encode('utf8')
 
     with zipfile.ZipFile(destino, 'w', zipfile.ZIP_DEFLATED) as z:

@@ -44,7 +44,7 @@ Toda peça nova parte deste arquivo. Ele já traz o cabeçalho e o rodapé; só 
 
 **Qualidade do logotipo:** o logotipo não fica dentro da faixa. O Google Docs reduz imagens largas para cerca de 2.000 pixels, e dentro da faixa de 21 cm ele ficava pixelado no zoom. Como imagem própria, entra com 2.000 px em 5 cm, cerca de 1.000 dpi, sem perda. No Word, a peça usa também o SVG vetorial, e o PDF sai com o logotipo em vetor. Conferido em 23/10/2026: o PDF do Google Docs manteve os 2.000 px.
 
-**Rodapé:** faixa toda bege, sem fio, de ponta a ponta e colada na borda de baixo (2,1 cm, `faixa-rodape.png`), com três linhas em Garamond 8, dourado `#7A5D10`, centralizadas na horizontal e na vertical: endereço completo, telefone e e-mail, nome e OAB. Entrelinha simples; a última linha tem 17,5 pt de espaço depois, o que põe o bloco no meio da faixa.
+**Rodapé:** faixa bege de ponta a ponta e colada na borda de baixo (2,1 cm, `faixa-rodape.png`), com o mesmo fio dourado do cabeçalho na borda de cima, separando o rodapé do corpo (simetria adotada em 25/11/2026), e com três linhas em Garamond 8, dourado `#7A5D10`, centralizadas na horizontal e na vertical: endereço completo, telefone e e-mail, nome e OAB. Entrelinha simples; a última linha tem 17,5 pt de espaço depois, o que põe o bloco no meio da faixa.
 
 As duas faixas e o logotipo ficam presos ao **cabeçalho**, com posição medida a partir da página. Assim o Word e o Google Docs mostram o rodapé igual (o Google Docs desloca imagens presas ao rodapé e deixava uma tira branca embaixo). Testado com exportação em PDF pelo Google Docs em 23/10/2026.
 

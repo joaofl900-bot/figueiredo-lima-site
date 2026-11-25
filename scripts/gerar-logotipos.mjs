@@ -73,8 +73,8 @@ const horizontal = await versoes('logotipo-horizontal', hData, hInfo.width, hInf
   { x: Math.round(hInfo.width * 0.12), y: Math.round(hInfo.height * 0.6) });
 await sharp(horizontal, { raw: { width: hInfo.width, height: hInfo.height, channels: 4 } }).png().toFile('src/assets/logo-dourado-bege.png');
 
-// Faixas bege das peças (folha A4 de ponta a ponta, 300 dpi): cabeçalho só com o fio dourado embaixo e
-// rodapé todo bege, sem fio. O logotipo entra no Word como imagem própria, em alta resolução, gerada do SVG
+// Faixas bege das peças (folha A4 de ponta a ponta, 300 dpi): cabeçalho com o fio dourado embaixo e
+// rodapé com o mesmo fio em cima (simetria pedida em 25/11/2026), separando ambos do corpo. O logotipo entra no Word como imagem própria, em alta resolução, gerada do SVG
 // vetorizado (scripts/vetorizar-logotipo.mjs): dentro da faixa larga ele perdia qualidade, porque o
 // Google Docs reduz imagens largas para cerca de 2.000 pixels.
 const cm = (v) => Math.round((v / 2.54) * 300);
@@ -85,6 +85,7 @@ await sharp({ create: { width: larguraA4, height: cm(2.5), channels: 3, backgrou
   .composite([{ input: fioOuro, left: 0, top: cm(2.5) - fio }])
   .png({ palette: true, colours: 2 }).toFile(`${saida}/faixa-cabecalho.png`);
 await sharp({ create: { width: larguraA4, height: cm(2.1), channels: 3, background: bege } })
+  .composite([{ input: fioOuro, left: 0, top: 0 }])
   .png({ palette: true, colours: 2 }).toFile(`${saida}/faixa-rodape.png`);
 // 2.000 px de largura para 5 cm na folha: cerca de 1.000 dpi, abaixo do limite do Google Docs.
 const svg = `${saida}/logotipo-horizontal-dourado-bege.svg`;
