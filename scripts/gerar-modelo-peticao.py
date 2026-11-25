@@ -21,6 +21,9 @@ LARGURA = 7560000
 ALTO_CAB = 900000      # 2,5 cm
 ALTO_ROD = 756000      # 2,1 cm
 ALTO_FOLHA = 10692130  # 16838 twips
+# Margem transparente de 1 mm (12 px a 300 dpi) do lado da página, em cada faixa, para o fio dourado não ficar
+# na borda da imagem (ver scripts/gerar-faixas.mjs). A parte bege continua com 2,5 cm e 2,1 cm.
+MARGEM_FAIXA = 36576
 # Logotipo no cabeçalho: 5,05 x 0,86 cm, centrado na folha, na mesma altura de antes (0,81 cm do topo).
 LOGO_LARGO = 1818360
 LOGO_ALTO = 308881
@@ -69,9 +72,9 @@ def linha_rodape(texto, depois=0):
 def novo_cabecalho(raiz_original):
     return (
         f'{raiz_original}<w:p><w:pPr><w:spacing w:after="0"/></w:pPr>'
-        f'{imagem("rIdFaixaCab", "Faixa do cabeçalho", 1001, 0, 0, LARGURA, ALTO_CAB)}'
+        f'{imagem("rIdFaixaCab", "Faixa do cabeçalho", 1001, 0, 0, LARGURA, ALTO_CAB + MARGEM_FAIXA)}'
         f'{imagem("rIdLogo", "Logotipo", 1003, (LARGURA - LOGO_LARGO) // 2, LOGO_TOPO, LOGO_LARGO, LOGO_ALTO, "rIdLogoSvg")}'
-        f'{imagem("rIdFaixaRod", "Faixa do rodapé", 1002, 0, ALTO_FOLHA - ALTO_ROD, LARGURA, ALTO_ROD)}</w:p></w:hdr>'
+        f'{imagem("rIdFaixaRod", "Faixa do rodapé", 1002, 0, ALTO_FOLHA - ALTO_ROD - MARGEM_FAIXA, LARGURA, ALTO_ROD + MARGEM_FAIXA)}</w:p></w:hdr>'
     )
 
 
